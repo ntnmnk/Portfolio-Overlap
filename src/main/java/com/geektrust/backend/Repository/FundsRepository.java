@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.geektrust.backend.Entities.FundEntity;
+import com.geektrust.backend.Entities.Funds;
 import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Exceptions.StockNotFoundException;
 import org.springframework.stereotype.Component;
@@ -16,13 +16,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class FundsRepository implements IFundsRepository {
     
+
     private final String urlString;
     private Map<String, Set<String>> fundsAndStockMap;
 
 
-
     public FundsRepository() {
-        this.urlString = "https://geektrust.s3.ap-southeast-1.amazonaws.com/portfolio-overlap/stock_data.json";
+        this.urlString="https://geektrust.s3.ap-southeast-1.amazonaws.com/portfolio-overlap/stock_data.json" ;
         this.deserialisationOfJsonData();
     }
 
@@ -35,7 +35,7 @@ public class FundsRepository implements IFundsRepository {
             URL url = new URL(this.urlString);
             FundsApiResponse ResponseDTO = objectMapper.readValue(url, FundsApiResponse.class);
             this.fundsAndStockMap = ResponseDTO.getFunds().stream()
-                    .collect(Collectors.toMap(FundEntity::getName, FundEntity::getStocks));
+                    .collect(Collectors.toMap(Funds::getName, Funds::getStocks));
         } catch (IOException e) {
             e.printStackTrace();
         }

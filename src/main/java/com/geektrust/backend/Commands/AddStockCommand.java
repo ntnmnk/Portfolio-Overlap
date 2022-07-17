@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
 import com.geektrust.backend.Services.IPortfolioService;
+import com.geektrust.backend.Services.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,10 @@ import org.springframework.stereotype.Service;
 public class AddStockCommand implements ICommand {
     
     @Autowired
-    private final IPortfolioService portfolioService;
+    private final PortfolioService portfolioService;
 
-    
-    public AddStockCommand(IPortfolioService portfolioService) {
+    @Autowired
+    public AddStockCommand(PortfolioService portfolioService) {
         this.portfolioService = portfolioService;
     }
 
@@ -32,7 +33,7 @@ public class AddStockCommand implements ICommand {
 
             portfolioService.addStocksToFund(fundName, stockName);
         } catch (NullPointerException e) {
-            System.out.println("There is no Command");
+            throw new CommandNotFoundException();
         }
 
     }

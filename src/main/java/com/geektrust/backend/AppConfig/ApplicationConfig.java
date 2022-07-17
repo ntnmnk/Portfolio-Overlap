@@ -23,19 +23,17 @@ import org.springframework.stereotype.Service;
 
 
 
-@Configuration
 
 public class ApplicationConfig {
-       
-        
-        private CommandInvoker commandInvoker =new CommandInvoker();
+
+        private CommandInvoker commandInvoker = new CommandInvoker();
 
         @Autowired
         private FundsRepository fundsRepository;
         
-        
-        @Autowired
-        private PortfolioService portfoliopService =new PortfolioService(fundsRepository);
+
+         @Autowired   
+        private PortfolioService portfoliopService=new PortfolioService(fundsRepository);
 
         
         private AddStockCommand addStockFundCommand = new AddStockCommand(portfoliopService);

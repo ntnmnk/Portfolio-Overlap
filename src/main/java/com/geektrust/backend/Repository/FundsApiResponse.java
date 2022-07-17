@@ -3,23 +3,17 @@ package com.geektrust.backend.Repository;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.util.ArrayList;
-import com.geektrust.backend.Entities.FundEntity;
+import com.geektrust.backend.Entities.Funds;
 
 class FundsApiResponse{
-     private ArrayList<FundEntity> funds;
+     private ArrayList<Funds> funds;
 
-     public ArrayList<FundEntity> getFunds() {
+     public ArrayList<Funds> getFunds() {
           return funds;
      }
 
-     public void setFunds(ArrayList<FundEntity> funds) {
+     public void setFunds(ArrayList<Funds> funds) {
           this.funds = funds;
      }
-
-    
-        
-     
-     
-
 
 }

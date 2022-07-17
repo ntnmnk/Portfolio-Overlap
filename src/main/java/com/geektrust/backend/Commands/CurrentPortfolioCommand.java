@@ -5,17 +5,16 @@ import java.util.Arrays;
 import java.util.List;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
 import com.geektrust.backend.Services.IPortfolioService;
+import com.geektrust.backend.Services.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 
 public class CurrentPortfolioCommand implements ICommand {
 
     @Autowired
-    private final IPortfolioService portfolioOverlapService;
+    private PortfolioService portfolioOverlapService;
      
-    
-    public CurrentPortfolioCommand(IPortfolioService portfolioOverlapService) {
+    @Autowired
+    public CurrentPortfolioCommand(PortfolioService portfolioOverlapService) {
         this.portfolioOverlapService = portfolioOverlapService;
     }
 
@@ -26,11 +25,11 @@ public class CurrentPortfolioCommand implements ICommand {
         try {
             String[] temp = new String[tokens.size()];
             tokens.toArray(temp);
-            String[] result = Arrays.copyOfRange(temp, 1, temp.length);
+            String[] stocksList = Arrays.copyOfRange(temp, 1, temp.length);
 
-            portfolioOverlapService.currentPortfolioStocks(result);
+            portfolioOverlapService.currentPortfolioStocks(stocksList);
         } catch (NullPointerException e) {
-            System.out.println("There is no Command");
+            System.out.println("COMMAND_NOT_FOUND");
         }
     }
 

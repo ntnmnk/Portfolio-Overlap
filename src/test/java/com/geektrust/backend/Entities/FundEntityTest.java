@@ -18,12 +18,9 @@ public class FundEntityTest {
         stocks.add("MINDTREE LIMITED");
         stocks.add("L&T TECHNOLOGY SERVICES LIMITED");
 
-        FundEntity fund = new FundEntity(name, stocks);
+        Funds fund = new Funds(name, stocks);
         String test = "KOTAK MAHINDRA BANK LIMITED";
         assertTrue(fund.getStocks().contains(test));
-
-
-
     }
 
 }

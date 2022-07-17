@@ -23,32 +23,39 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
 
 @SpringBootApplication
-public class App {
-    // To run the application ./gradlew run --args="input1.txt"
+public class App implements CommandLineRunner {
+    // To run the application ./gradlew run --args="input.txt"
     @Autowired
     private ApplicationContext appContext;
+    
+    
+    @Autowired
+    FundsRepository fundsRepository;
+    
 
-  
+    
+    PortfolioService portfolioService=new PortfolioService(fundsRepository);
+    
+    final ApplicationConfig applicationConfig = new ApplicationConfig();
 
-//    @Bean
-//  @Autowired
-//    public PortfolioService portfolioService(){
-//        return new PortfolioService(fundsRepository());
-//    }
+   
+
+    //    @Bean
+    //  @Autowired
+    //    public PortfolioService portfolioService(){
+    //        return new PortfolioService(fundsRepository());
+    //    }
 
 
     public static void main(String[] args) {
-            
+
 
         System.out.println("hello");
-    SpringApplication.run(App.class, args);
-        
-      
 
-         List<String> commandLineArgs = new LinkedList<>(Arrays.asList(args));
 
-         run(commandLineArgs);
-       
+
+        SpringApplication.run(App.class, args);
+
     }
 
     // @Override
@@ -62,10 +69,17 @@ public class App {
     //     }
 
     // }
+    @Override
+    public void run(String... args) throws Exception {
+        List<String> commandLineArgs = new LinkedList<>(Arrays.asList(args));
 
-    public static void run(List<String> commandLineArgs) {
-
-        ApplicationConfig applicationConfig = new ApplicationConfig();
+        fundsRepository.printR();
+        portfolioService.printR();
+        String[] beans = appContext.getBeanDefinitionNames();
+        Arrays.sort(beans);
+        for (String bean : beans) {
+        System.out.println(bean);
+        }
         CommandInvoker commandInvoker = applicationConfig.getCommandInvoker();
 
         BufferedReader reader;
@@ -86,5 +100,22 @@ public class App {
         }
     }
 
+    // @Bean
+    // public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+    //     return args -> {
+
+    //         System.out.println("Let's inspect the beans provided by Spring Boot:");
+
+    //         String[] beanNames = ctx.getBeanDefinitionNames();
+    //         Arrays.sort(beanNames);
+    //         for (String beanName : beanNames) {
+    //             System.out.println(beanName);
+    //         }
+
+    //     };
+    // }
+
 }
+
+
 

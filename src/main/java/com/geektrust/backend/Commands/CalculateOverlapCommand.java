@@ -3,6 +3,7 @@ package com.geektrust.backend.Commands;
 import java.util.List;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
 import com.geektrust.backend.Services.IPortfolioService;
+import com.geektrust.backend.Services.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -10,11 +11,11 @@ import org.springframework.stereotype.Service;
 
 public class CalculateOverlapCommand implements ICommand {
 
+    
+    private final PortfolioService portfolioService;
+    
     @Autowired
-    private final IPortfolioService portfolioService;
-    
-    
-    public CalculateOverlapCommand(IPortfolioService portfolioService) {
+    public CalculateOverlapCommand(PortfolioService portfolioService) {
         this.portfolioService = portfolioService;
     }
 
@@ -27,7 +28,7 @@ public class CalculateOverlapCommand implements ICommand {
 
             portfolioService.calculatePortfolioOverlap(fundForCalculation);
         } catch (NullPointerException e) {
-            System.out.println("There is no Command");
+            System.out.println("COMMAND_NOT_FOUND");
         }
         
     }

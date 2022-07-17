@@ -2,6 +2,7 @@ package com.geektrust.backend.Services;
 
 import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Exceptions.StockNotFoundException;
+import com.geektrust.backend.Repository.FundsRepository;
 import com.geektrust.backend.Repository.IFundsRepository;
 import com.geektrust.backend.Util.OverlapCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,22 +16,18 @@ public class PortfolioService implements IPortfolioService {
 
     private String[] fundNames;
     
-    private IFundsRepository stockRepository;
+    private FundsRepository fundsRepository;
 
-    @Autowired
-    private OverlapCalculator portfolioOverlapCalculator;
+    
+    private OverlapCalculator portfolioOverlapCalculator=new OverlapCalculator();
         
-
-    public PortfolioService(){
-
-    }
-
     public void printR() {
         System.out.println("I m in the Portfolio");
     }
-
-    public PortfolioService(IFundsRepository stockRepository){
-        this.stockRepository = stockRepository;
+    
+   @Autowired
+    public PortfolioService(FundsRepository fundsRepository){
+        this.fundsRepository = fundsRepository;
     }
 
     @Override
@@ -50,8 +47,8 @@ public class PortfolioService implements IPortfolioService {
             for (String fund : this.fundNames) {
 
                 String overlapPercentage = portfolioOverlapCalculator.overlap(
-                        stockRepository.getStocksFromFund(fund),
-                        stockRepository.getStocksFromFund(fundsToCompare));
+                        fundsRepository.getStocksFromFund(fund),
+                        fundsRepository.getStocksFromFund(fundsToCompare));
 
                 if (Double.parseDouble(overlapPercentage) > (double)0)
                     System.out.println(
@@ -71,7 +68,7 @@ public class PortfolioService implements IPortfolioService {
         // TODO:Adding the fund name to which the new stock will be added and the name of the new
         // stock.
         try {
-            stockRepository.addStocksToFund(fundName, stockName);
+            fundsRepository.addStocksToFund(fundName, stockName);
         } catch (RuntimeException e) {
             System.out.println(e.getStackTrace());
         }
