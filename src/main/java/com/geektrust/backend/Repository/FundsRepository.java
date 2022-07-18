@@ -26,7 +26,7 @@ public class FundsRepository implements IFundsRepository {
         this.deserialisationOfJsonData();
     }
 
-    public void printR(){System.out.println("I m in the fundrep");}
+   
     // Converting Json data to java readable object
     public void deserialisationOfJsonData() {
 

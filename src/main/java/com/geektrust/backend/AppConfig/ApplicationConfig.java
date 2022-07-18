@@ -33,8 +33,8 @@ public class ApplicationConfig {
         private FundsRepository fundsRepository=new FundsRepository();
         
         
-        @Autowired
-        private PortfolioService portfoliopService;
+        
+        private PortfolioService portfoliopService=new PortfolioService(fundsRepository);
 
         
         private AddStockCommand addStockFundCommand = new AddStockCommand(portfoliopService);

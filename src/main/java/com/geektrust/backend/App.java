@@ -55,13 +55,12 @@ public class App implements CommandLineRunner {
     public void run(String... args) throws Exception {
         List<String> commandLineArgs = new LinkedList<>(Arrays.asList(args));
 
-        fundsRepository.printR();
-        portfolioService.printR();
-        String[] beans = appContext.getBeanDefinitionNames();
-        Arrays.sort(beans);
-        for (String bean : beans) {
-        System.out.println(bean);
-        }
+        
+        // String[] beans = appContext.getBeanDefinitionNames();
+        // Arrays.sort(beans);
+        // for (String bean : beans) {
+        // System.out.println(bean);
+        // }
         CommandInvoker commandInvoker = applicationConfig.getCommandInvoker();
 
         BufferedReader reader;
