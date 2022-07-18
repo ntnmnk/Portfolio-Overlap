@@ -12,7 +12,7 @@ public class CurrentPortfolioCommand implements ICommand {
 
     @Autowired
     private PortfolioService portfolioOverlapService;
-     
+
     @Autowired
     public CurrentPortfolioCommand(PortfolioService portfolioOverlapService) {
         this.portfolioOverlapService = portfolioOverlapService;
@@ -21,7 +21,7 @@ public class CurrentPortfolioCommand implements ICommand {
     // Execute the registered Command
     @Override
     public void execute(List<String> tokens) throws CommandNotFoundException, NullPointerException {
-    
+
         try {
             String[] temp = new String[tokens.size()];
             tokens.toArray(temp);
@@ -29,7 +29,7 @@ public class CurrentPortfolioCommand implements ICommand {
 
             portfolioOverlapService.currentPortfolioStocks(stocksList);
         } catch (NullPointerException e) {
-            System.out.println("COMMAND_NOT_FOUND");
+            throw new CommandNotFoundException("COMMAND NOT FOUND");
         }
     }
 

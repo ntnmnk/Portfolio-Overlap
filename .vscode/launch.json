@@ -16,6 +16,7 @@
             "type": "java",
             "name": "Launch App",
             "request": "launch",
+            "args": "input.txt",
             "mainClass": "com.geektrust.backend.App",
             "projectName": "backend"
         }

@@ -18,8 +18,8 @@ public class PortfolioService implements IPortfolioService {
     
     private FundsRepository fundsRepository;
 
-    
-    private OverlapCalculator portfolioOverlapCalculator=new OverlapCalculator();
+    @Autowired
+    private OverlapCalculator portfolioOverlapCalculator;
         
     public void printR() {
         System.out.println("I m in the Portfolio");

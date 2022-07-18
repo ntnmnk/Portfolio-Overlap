@@ -2,7 +2,7 @@ package com.geektrust.backend.Util;
 
 import java.text.DecimalFormat;
 import java.util.*;
-import org.springframework.stereotype.Component;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,14 +18,16 @@ public class OverlapCalculator {
 
         List<String> list = new ArrayList<String>();
 
-        Set<String> commonElements = new HashSet<>();
-        commonElements.addAll(stockList1);
-        commonElements.addAll(stockList2);
+        // Set<String> commonElements = new HashSet<>();
+        // commonElements.addAll(stockList1);
+        // commonElements.addAll(stockList2);
 
 
-        int commonCount = totalstocks - commonElements.size();
+       
+        Set<String> intersection =
+                stockList1.stream().filter(i -> stockList2.contains(i)).collect(Collectors.toSet());
 
-
+        int commonCount = intersection.size();
         DecimalFormat df = new DecimalFormat("#.##");
 
         df.setMinimumFractionDigits(2);

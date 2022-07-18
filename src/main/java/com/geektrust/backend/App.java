@@ -14,27 +14,14 @@ import com.geektrust.backend.Services.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.annotation.Order;
 
 @SpringBootApplication
 public class App implements CommandLineRunner {
     // To run the application ./gradlew run --args="input.txt"
     @Autowired
     private ApplicationContext appContext;
-    
-    
-    @Autowired
-    FundsRepository fundsRepository;
-    
-
-    
-    PortfolioService portfolioService=new PortfolioService(fundsRepository);
     
     final ApplicationConfig applicationConfig = new ApplicationConfig();
 
@@ -48,11 +35,6 @@ public class App implements CommandLineRunner {
 
 
     public static void main(String[] args) {
-
-
-        System.out.println("hello");
-
-
 
         SpringApplication.run(App.class, args);
 
