@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.geektrust.backend.Entities.Funds;
 import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Exceptions.StockNotFoundException;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 

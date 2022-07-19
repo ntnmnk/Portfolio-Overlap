@@ -20,10 +20,12 @@ import org.springframework.context.ApplicationContext;
 @SpringBootApplication
 public class App implements CommandLineRunner {
     // To run the application ./gradlew run --args="input.txt"
-    @Autowired
-    private ApplicationContext appContext;
+   
     
-    final ApplicationConfig applicationConfig = new ApplicationConfig();
+    @Autowired
+    ApplicationConfig applicationConfig;
+
+    
 
    
 

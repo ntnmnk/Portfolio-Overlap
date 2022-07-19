@@ -1,5 +1,7 @@
 package com.geektrust.backend.AppConfig;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import com.geektrust.backend.Commands.AddStockCommand;
 import com.geektrust.backend.Commands.CalculateOverlapCommand;
@@ -23,28 +25,29 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
-
-@RequiredArgsConstructor
+@Configuration
+@AllArgsConstructor
+@NoArgsConstructor
 public class ApplicationConfig {
 
-        private CommandInvoker commandInvoker = new CommandInvoker();
+        @Autowired
+        private CommandInvoker commandInvoker;
 
+        // @Autowired
+        // private FundsRepository fundsRepository;
         
-        private FundsRepository fundsRepository=new FundsRepository();
         
-        
-        
-        private PortfolioService portfoliopService=new PortfolioService(fundsRepository);
+        // @Autowired
+        // private PortfolioService portfoliopService;
 
-        
-        private AddStockCommand addStockFundCommand = new AddStockCommand(portfoliopService);
+        @Autowired
+        private AddStockCommand addStockFundCommand ;
 
+         @Autowired
+        private CalculateOverlapCommand calculateOverlapCommand ;
 
-        private CalculateOverlapCommand calculateOverlapCommand =
-                        new CalculateOverlapCommand(portfoliopService);
-
-        private CurrentPortfolioCommand currentPortfolioCommand =
-                        new CurrentPortfolioCommand(portfoliopService);
+        @Autowired                
+        private CurrentPortfolioCommand currentPortfolioCommand ;
 
 
 

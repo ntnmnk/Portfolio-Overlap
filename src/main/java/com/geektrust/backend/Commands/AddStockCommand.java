@@ -5,9 +5,10 @@ import java.util.stream.Collectors;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
 import com.geektrust.backend.Services.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
-
+@Service
 public class AddStockCommand implements ICommand {
     
     @Autowired
