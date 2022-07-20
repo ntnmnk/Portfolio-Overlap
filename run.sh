@@ -6,4 +6,4 @@
 #Remove the below comment during code submission on Geektrust Platform
 gradle clean build -x test --no-daemon
 
-java -jar build/libs/geektrust.jar sample_input/input2.txt
+java -jar build/libs/geektrust.jar sample_input/input1.txt

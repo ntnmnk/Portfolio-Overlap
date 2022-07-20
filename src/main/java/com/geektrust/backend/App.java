@@ -26,10 +26,6 @@ public class App implements CommandLineRunner {
     @Autowired
     ApplicationConfig applicationConfig;
 
-    
-
-   
-
     //    @Bean
     //  @Autowired
     //    public PortfolioService portfolioService(){
