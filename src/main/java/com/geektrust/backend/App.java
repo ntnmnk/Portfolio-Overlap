@@ -1,5 +1,6 @@
 package com.geektrust.backend;
 
+import org.springframework.boot.Banner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -38,7 +39,10 @@ public class App implements CommandLineRunner {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(App.class, args);
+        SpringApplication app = new SpringApplication(App.class);
+        app.setBannerMode(Banner.Mode.OFF);
+        
+        app.run(args);
 
     }
 

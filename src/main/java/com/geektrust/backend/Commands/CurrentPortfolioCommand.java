@@ -4,12 +4,11 @@ package com.geektrust.backend.Commands;
 import java.util.Arrays;
 import java.util.List;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
-import com.geektrust.backend.Services.IPortfolioService;
 import com.geektrust.backend.Services.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class CurrentPortfolioCommand implements ICommand {
 
     @Autowired
