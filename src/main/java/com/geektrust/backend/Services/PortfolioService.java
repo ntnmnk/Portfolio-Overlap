@@ -16,17 +16,19 @@ public class PortfolioService implements IPortfolioService {
 
     private String[] fundNames;
     
-    @Autowired
-    private FundsRepository fundsRepository;
+    
+    private IFundsRepository fundsRepository;
 
-    @Autowired
-    private OverlapCalculator portfolioOverlapCalculator;
+    
+    private OverlapCalculator portfolioOverlapCalculator=new OverlapCalculator();
         
     
    
-    // public PortfolioService(FundsRepository fundsRepository){
-    //     this.fundsRepository = fundsRepository;
-    // }
+    public PortfolioService(IFundsRepository fundsRepository){
+        this.fundsRepository = fundsRepository;
+    }
+
+   
 
     @Override
     public void currentPortfolioStocks(String[] fundList) throws FundNotFoundException {

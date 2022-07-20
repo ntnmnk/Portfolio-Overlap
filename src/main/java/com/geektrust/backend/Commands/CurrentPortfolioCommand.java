@@ -4,6 +4,7 @@ package com.geektrust.backend.Commands;
 import java.util.Arrays;
 import java.util.List;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
+import com.geektrust.backend.Services.IPortfolioService;
 import com.geektrust.backend.Services.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,12 +12,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class CurrentPortfolioCommand implements ICommand {
 
-    @Autowired
-    private PortfolioService portfolioOverlapService;
+    
+    private IPortfolioService portfolioOverlapService;
 
     
-    public CurrentPortfolioCommand(PortfolioService portfolioOverlapService) {
-        this.portfolioOverlapService = portfolioOverlapService;
+    public CurrentPortfolioCommand(IPortfolioService portfolioService) {
+        this.portfolioOverlapService = portfolioService;
     }
 
     // Execute the registered Command

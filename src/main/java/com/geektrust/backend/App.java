@@ -19,12 +19,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
-public class App implements CommandLineRunner {
+public class App {
     // To run the application ./gradlew run --args="input.txt"
    
     
-    @Autowired
-    ApplicationConfig applicationConfig;
+    
+    static ApplicationConfig applicationConfig=new ApplicationConfig();
 
     //    @Bean
     //  @Autowired
@@ -33,12 +33,15 @@ public class App implements CommandLineRunner {
     //    }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
-        SpringApplication app = new SpringApplication(App.class);
-        app.setBannerMode(Banner.Mode.OFF);
+        // SpringApplication app = new SpringApplication(App.class);
+        // app.setBannerMode(Banner.Mode.OFF);
         
-        app.run(args);
+        // app.run(args);
+        List<String> commandLineArgs = new LinkedList<>(Arrays.asList(args));
+        run(commandLineArgs);
+
 
     }
 
@@ -53,9 +56,9 @@ public class App implements CommandLineRunner {
     //     }
 
     // }
-    @Override
-    public void run(String... args) throws Exception {
-        List<String> commandLineArgs = new LinkedList<>(Arrays.asList(args));
+    
+    public static void run(List<String> commandLineArgs) throws Exception {
+        //List<String> commandLineArgs = new LinkedList<>(Arrays.asList(args));
 
         
         // String[] beans = appContext.getBeanDefinitionNames();

@@ -3,20 +3,21 @@ package com.geektrust.backend.Commands;
 import java.util.List;
 import java.util.stream.Collectors;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
+import com.geektrust.backend.Services.IPortfolioService;
 import com.geektrust.backend.Services.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
-@Component
+
 public class AddStockCommand implements ICommand {
     
-    @Autowired
-    private final PortfolioService portfolioService;
+    
+    private IPortfolioService portfolioService;
 
-    @Autowired
-    public AddStockCommand(PortfolioService portfolioService) {
+    
+    public AddStockCommand(IPortfolioService portfolioService) {
         this.portfolioService = portfolioService;
     }
 

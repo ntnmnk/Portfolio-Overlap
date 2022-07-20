@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 public class CalculateOverlapCommand implements ICommand {
 
     
-    private final PortfolioService portfolioService;
+    private  IPortfolioService portfolioService;
     
-    @Autowired
-    public CalculateOverlapCommand(PortfolioService portfolioService) {
-        this.portfolioService = portfolioService;
+    
+    public CalculateOverlapCommand(IPortfolioService portfolioService2) {
+        this.portfolioService = portfolioService2;
     }
 
 

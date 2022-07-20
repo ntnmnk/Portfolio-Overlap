@@ -8,6 +8,7 @@ import com.geektrust.backend.Commands.CalculateOverlapCommand;
 import com.geektrust.backend.Commands.CommandInvoker;
 import com.geektrust.backend.Commands.CurrentPortfolioCommand;
 import com.geektrust.backend.Repository.FundsRepository;
+import com.geektrust.backend.Repository.IFundsRepository;
 import com.geektrust.backend.Services.IPortfolioService;
 import com.geektrust.backend.Services.PortfolioService;
 import org.checkerframework.common.subtyping.qual.Unqualified;
@@ -30,24 +31,25 @@ import org.springframework.stereotype.Service;
 @NoArgsConstructor
 public class ApplicationConfig {
 
-        @Autowired
-        private CommandInvoker commandInvoker;
-
-        // @Autowired
-        // private FundsRepository fundsRepository;
         
+        private CommandInvoker commandInvoker=new CommandInvoker();
+
         
-        // @Autowired
-        // private PortfolioService portfoliopService;
+        private final IFundsRepository fundsRepository = new FundsRepository();
 
-        @Autowired
-        private AddStockCommand addStockFundCommand ;
+        private final IPortfolioService portfolioService =
+                        new PortfolioService(fundsRepository);
 
-         @Autowired
-        private CalculateOverlapCommand calculateOverlapCommand ;
 
-        @Autowired                
-        private CurrentPortfolioCommand currentPortfolioCommand ;
+        
+        private AddStockCommand addStockFundCommand=new AddStockCommand(portfolioService) ;
+
+         
+        private CalculateOverlapCommand calculateOverlapCommand =new CalculateOverlapCommand(
+                        portfolioService);
+
+                      
+        private CurrentPortfolioCommand currentPortfolioCommand=new CurrentPortfolioCommand(portfolioService) ;
 
 
 
