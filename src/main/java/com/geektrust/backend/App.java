@@ -26,36 +26,16 @@ public class App {
     
     static ApplicationConfig applicationConfig=new ApplicationConfig();
 
-    //    @Bean
-    //  @Autowired
-    //    public PortfolioService portfolioService(){
-    //        return new PortfolioService(fundsRepository());
-    //    }
 
 
     public static void main(String[] args) throws Exception {
-
-        // SpringApplication app = new SpringApplication(App.class);
-        // app.setBannerMode(Banner.Mode.OFF);
         
         // app.run(args);
         List<String> commandLineArgs = new LinkedList<>(Arrays.asList(args));
         run(commandLineArgs);
 
-
     }
 
-    // @Override
-    // public void run(String... args) throws Exception {
-    //     fundsRepository.printR();
-    //     portfolioService.printR();
-    //     String[] beans = appContext.getBeanDefinitionNames();
-    //     Arrays.sort(beans);
-    //     for (String bean : beans) {
-    //         System.out.println(bean);
-    //     }
-
-    // }
     
     public static void run(List<String> commandLineArgs) throws Exception {
         //List<String> commandLineArgs = new LinkedList<>(Arrays.asList(args));
@@ -86,20 +66,7 @@ public class App {
         }
     }
 
-    // @Bean
-    // public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
-    //     return args -> {
-
-    //         System.out.println("Let's inspect the beans provided by Spring Boot:");
-
-    //         String[] beanNames = ctx.getBeanDefinitionNames();
-    //         Arrays.sort(beanNames);
-    //         for (String beanName : beanNames) {
-    //             System.out.println(beanName);
-    //         }
-
-    //     };
-    // }
+  
 
 }
 

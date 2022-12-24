@@ -72,7 +72,7 @@ public class PortfolioService implements IPortfolioService {
         }
     }
 
-    public String[] getFundName() {
+    public String[] getFundNames() {
 
         for (String string : fundNames) {
             System.out.println(string);

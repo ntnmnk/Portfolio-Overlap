@@ -8,7 +8,7 @@ plugins {
 
 group = 'com.geektrust'
 version = '1.0'
-sourceCompatibility = 1.8
+sourceCompatibility = 1.14
 targetCompatibility = 1.8
 
 jacoco { //Please do not change this
