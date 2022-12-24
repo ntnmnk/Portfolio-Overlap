@@ -16,10 +16,8 @@ public class PortfolioService implements IPortfolioService {
 
     private String[] fundNames;
     
-    
     private IFundsRepository fundsRepository;
 
-    
     private OverlapCalculator portfolioOverlapCalculator=new OverlapCalculator();
         
     
