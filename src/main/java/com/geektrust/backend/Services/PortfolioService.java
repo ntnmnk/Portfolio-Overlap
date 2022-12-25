@@ -2,11 +2,8 @@ package com.geektrust.backend.Services;
 
 import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Exceptions.StockNotFoundException;
-import com.geektrust.backend.Repository.FundsRepository;
 import com.geektrust.backend.Repository.IFundsRepository;
 import com.geektrust.backend.Util.OverlapCalculator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
@@ -68,7 +65,7 @@ public class PortfolioService implements IPortfolioService {
         try {
             fundsRepository.addStocksToFund(fundName, stockName);
         } catch (RuntimeException e) {
-            System.out.println(e.getStackTrace());
+            System.out.println("FUND_NOT_FOUND");
         }
     }
 

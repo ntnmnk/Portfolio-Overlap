@@ -4,12 +4,9 @@ package com.geektrust.backend.Commands;
 import java.util.Arrays;
 import java.util.List;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
+import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Services.IPortfolioService;
-import com.geektrust.backend.Services.PortfolioService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
 public class CurrentPortfolioCommand implements ICommand {
 
     
@@ -30,8 +27,8 @@ public class CurrentPortfolioCommand implements ICommand {
             String[] stocksList = Arrays.copyOfRange(temp, 1, temp.length);
 
             portfolioOverlapService.currentPortfolioStocks(stocksList);
-        } catch (NullPointerException e) {
-            throw new CommandNotFoundException("COMMAND NOT FOUND");
+        } catch (FundNotFoundException e) {
+            throw new FundNotFoundException("FUND_NOT_FOUND");
         }
     }
 

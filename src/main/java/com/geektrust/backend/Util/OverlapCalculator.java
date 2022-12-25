@@ -3,10 +3,7 @@ package com.geektrust.backend.Util;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-@Component
 public class OverlapCalculator {
 
 

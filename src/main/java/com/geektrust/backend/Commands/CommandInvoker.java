@@ -1,16 +1,11 @@
 package com.geektrust.backend.Commands;
 
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-
-@Component
 @NoArgsConstructor
 public class CommandInvoker {
     private static final Map<String, ICommand> commandMap = new HashMap<>();

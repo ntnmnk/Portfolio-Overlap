@@ -1,6 +1,5 @@
 package com.geektrust.backend;
 
-import org.springframework.boot.Banner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,13 +9,6 @@ import java.util.List;
 import com.geektrust.backend.AppConfig.ApplicationConfig;
 import com.geektrust.backend.Commands.CommandInvoker;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
-import com.geektrust.backend.Repository.FundsRepository;
-import com.geektrust.backend.Services.PortfolioService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 
 
 public class App {
@@ -38,14 +30,7 @@ public class App {
 
     
     public static void run(List<String> commandLineArgs) throws Exception {
-        //List<String> commandLineArgs = new LinkedList<>(Arrays.asList(args));
-
-        
-        // String[] beans = appContext.getBeanDefinitionNames();
-        // Arrays.sort(beans);
-        // for (String bean : beans) {
-        // System.out.println(bean);
-        // }
+     
         CommandInvoker commandInvoker = applicationConfig.getCommandInvoker();
 
         BufferedReader reader;

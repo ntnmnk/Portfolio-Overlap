@@ -1,6 +1,4 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.4'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id 'jacoco'
     id 'application'
@@ -8,7 +6,7 @@ plugins {
 
 group = 'com.geektrust'
 version = '1.0'
-sourceCompatibility = 1.14
+sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 jacoco { //Please do not change this

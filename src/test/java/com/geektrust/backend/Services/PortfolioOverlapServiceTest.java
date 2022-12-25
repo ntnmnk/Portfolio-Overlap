@@ -16,7 +16,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+
 public class PortfolioOverlapServiceTest {
+    
     IFundsRepository mockStockRepository = new MockStockRepositories();
     PortfolioService mockPortfolioOverlapService = new PortfolioService(mockStockRepository);
 
@@ -29,10 +31,6 @@ public class PortfolioOverlapServiceTest {
         System.setOut(new PrintStream(byteArrayOutputStream));
     }
 
-   
-
-
-
     @Test
     public void testSetPortfolio() {
         String[] fundList = {"UTI_NIFTY_INDEX","AXIS_MIDCAP", "PARAG_PARIKH_FLEXI_CAP"};
@@ -42,7 +40,6 @@ public class PortfolioOverlapServiceTest {
     }
     
    
-
     @Test
     @DisplayName("Testing addition of  Stocks to funds of User when stock name have space in between eg HDFC BANK LIMITED")
 
@@ -108,7 +105,6 @@ public class PortfolioOverlapServiceTest {
     
         @Override
         public Set<String> getStocksFromFund(String fundName) throws FundNotFoundException {
-            // TODO Auto-generated method stub
             Set<String> stockListOfFund = this.fundsAndStockMap.get(fundName);
             if(stockListOfFund == null){
                 throw new FundNotFoundException("STOCKS_NOT_FOUND");
@@ -119,7 +115,6 @@ public class PortfolioOverlapServiceTest {
         @Override
         public Set<String> addStocksToFund(String fundName, String stockName)
                 throws FundNotFoundException, StockNotFoundException {
-            // TODO Auto-generated method stub
             Set<String> updatedStockList = getStocksFromFund(fundName);
             if(updatedStockList == null){
                 throw new StockNotFoundException("STOCKS_NOT_FOUND");

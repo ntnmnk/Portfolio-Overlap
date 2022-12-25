@@ -21,7 +21,7 @@ public class CommandInvokerTest {
     private CommandInvoker commandInvoker;
 
     @Mock
-    AddStockCommand addStockToFundCommand;
+    AddStockCommand addStockCommand;
 
     @Mock
     CalculateOverlapCommand calculateOverlapCommand;
@@ -34,7 +34,7 @@ public class CommandInvokerTest {
         commandInvoker = new CommandInvoker();
         commandInvoker.register("CURRENT_PORTFOLIO", currentPortfolioCommand);
         commandInvoker.register("CALCULATE_OVERLAP", calculateOverlapCommand);
-        commandInvoker.register("ADD_STOCK", addStockToFundCommand);
+        commandInvoker.register("ADD_STOCK", addStockCommand);
     }
 
     @Test
