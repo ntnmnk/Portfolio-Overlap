@@ -6,8 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.geektrust.backend.Exceptions.FundNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@DisplayName("Repository Test")
+@DisplayName("Funds Repository Test")
+@ExtendWith(MockitoExtension.class)
+
 public class FundsRepositoryTest {
     FundsRepository fundsRepository=new FundsRepository();
 

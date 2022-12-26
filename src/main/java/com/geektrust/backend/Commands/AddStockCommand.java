@@ -12,7 +12,6 @@ public class AddStockCommand implements ICommand {
     
     private IPortfolioService portfolioService;
 
-    
     public AddStockCommand(IPortfolioService portfolioService) {
         this.portfolioService = portfolioService;
     }

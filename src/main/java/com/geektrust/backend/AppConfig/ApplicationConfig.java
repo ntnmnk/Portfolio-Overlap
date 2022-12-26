@@ -1,7 +1,5 @@
 package com.geektrust.backend.AppConfig;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import com.geektrust.backend.Commands.AddStockCommand;
 import com.geektrust.backend.Commands.CalculateOverlapCommand;
 import com.geektrust.backend.Commands.CommandInvoker;
@@ -12,8 +10,6 @@ import com.geektrust.backend.Services.IPortfolioService;
 import com.geektrust.backend.Services.PortfolioService;
 
 
-@AllArgsConstructor
-@NoArgsConstructor
 public class ApplicationConfig {
 
         

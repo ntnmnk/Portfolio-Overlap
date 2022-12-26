@@ -1,12 +1,10 @@
 package com.geektrust.backend.Commands;
 
-import lombok.NoArgsConstructor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
 
-@NoArgsConstructor
 public class CommandInvoker {
     private static final Map<String, ICommand> commandMap = new HashMap<>();
 

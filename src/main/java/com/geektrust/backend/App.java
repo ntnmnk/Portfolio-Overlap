@@ -19,7 +19,6 @@ public class App {
     static ApplicationConfig applicationConfig=new ApplicationConfig();
 
 
-
     public static void main(String[] args) throws Exception {
         
         // app.run(args);

@@ -4,11 +4,8 @@ import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Exceptions.StockNotFoundException;
 import com.geektrust.backend.Repository.IFundsRepository;
 import com.geektrust.backend.Util.OverlapCalculator;
-import org.springframework.stereotype.Service;
 
 
-
-@Service
 public class PortfolioService implements IPortfolioService {
 
     private String[] fundNames;
@@ -17,7 +14,6 @@ public class PortfolioService implements IPortfolioService {
 
     private OverlapCalculator portfolioOverlapCalculator=new OverlapCalculator();
         
-    
    
     public PortfolioService(IFundsRepository fundsRepository){
         this.fundsRepository = fundsRepository;
@@ -27,7 +23,7 @@ public class PortfolioService implements IPortfolioService {
 
     @Override
     public void currentPortfolioStocks(String[] fundList) throws FundNotFoundException {
-        // TODO: adding given funds to user's portfolio
+        // Adding given funds to user's portfolio
         if (fundList == null) {
             throw new FundNotFoundException("FUND_NOT_FOUND");
         }
@@ -36,7 +32,7 @@ public class PortfolioService implements IPortfolioService {
 
     @Override
     public void calculatePortfolioOverlap(String fundsToCompare) {
-        // TODO: calculating overlap and overlap percent of given funds with the funds user having
+        //  Calculating overlap and overlap percent of given funds with the funds user having
         // currently
         try {
             for (String fund : this.fundNames) {
@@ -60,7 +56,7 @@ public class PortfolioService implements IPortfolioService {
     @Override
     public void addStocksToFund(String fundName, String stockName)
             throws FundNotFoundException, StockNotFoundException {
-        // TODO:Adding the fund name to which the new stock will be added and the name of the new
+        // Adding the fund name to which the new stock will be added and the name of the new
         // stock.
         try {
             fundsRepository.addStocksToFund(fundName, stockName);

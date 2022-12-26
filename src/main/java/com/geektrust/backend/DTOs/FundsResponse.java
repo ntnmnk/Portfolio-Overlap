@@ -1,9 +1,10 @@
-package com.geektrust.backend.Repository;
+package com.geektrust.backend.DTOs;
+
 import java.util.ArrayList;
 import com.geektrust.backend.Entities.Funds;
 
-class FundsApiResponse{
-     private ArrayList<Funds> funds;
+public class FundsResponse{
+     public ArrayList<Funds> funds;
 
      public ArrayList<Funds> getFunds() {
           return funds;
