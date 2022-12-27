@@ -19,8 +19,8 @@ public class FundsRepository implements IFundsRepository {
     private Map<String, Set<String>> fundsAndStockMap;
 
 
-    public FundsRepository() {
-        this.urlString="https://geektrust.s3.ap-southeast-1.amazonaws.com/portfolio-overlap/stock_data.json" ;
+    public FundsRepository(String url) {
+        this.urlString=url;
        this.deserialisationOfJsonData();
     }
 
@@ -48,7 +48,7 @@ public class FundsRepository implements IFundsRepository {
     public Set<String> getStocksFromFund(String fundName) throws FundNotFoundException {
         Set<String> stockListOfFund = this.fundsAndStockMap.get(fundName);
         if (stockListOfFund == null) {
-            throw new FundNotFoundException("STOCKS_NOT_FOUND");
+            throw new FundNotFoundException("FUND_NOT_FOUND");
         }
         return stockListOfFund;
     }
@@ -58,7 +58,7 @@ public class FundsRepository implements IFundsRepository {
             throws FundNotFoundException, StockNotFoundException {
         Set<String> updatedStockList = getStocksFromFund(fundName);
         if (updatedStockList == null) {
-            throw new StockNotFoundException("STOCKS_NOT_FOUND");
+            throw new StockNotFoundException("FUND_NOT_FOUND");
         }
         updatedStockList.add(stockName);
         return updatedStockList;

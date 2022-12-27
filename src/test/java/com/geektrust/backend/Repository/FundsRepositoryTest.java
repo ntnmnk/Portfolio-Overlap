@@ -13,7 +13,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 
 public class FundsRepositoryTest {
-    FundsRepository fundsRepository=new FundsRepository();
+    String url="https://geektrust.s3.ap-southeast-1.amazonaws.com/portfolio-overlap/stock_data.json";
+    FundsRepository fundsRepository=new FundsRepository(url);
 
     @Test
     @DisplayName("Checking if the amount of funds in api are equal to te fund method is accessing")

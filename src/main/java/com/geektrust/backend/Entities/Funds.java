@@ -1,9 +1,10 @@
 package com.geektrust.backend.Entities;
 
+import lombok.Getter;
 import java.util.Set;
 
 
-
+@Getter
 public class Funds {
     private String name;
     private Set<String> stocks;
@@ -14,14 +15,7 @@ public class Funds {
     }
     
     
-    public String getName() {
-        return name;
-    }
-
-
-    public Set<String> getStocks() {
-        return stocks;
-    }
+    
 
 
     @Override
