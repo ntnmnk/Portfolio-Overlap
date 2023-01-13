@@ -9,8 +9,7 @@ public interface IFundsRepository {
 
     Set<String> getStocksFromFund(String fundName) throws FundNotFoundException;
   
-    Set<String> addStocksToFund(String fundName, String stockName)
-            throws FundNotFoundException, StockNotFoundException;
+    Set<String> addStocksToFund(String fundName, String stockName) throws FundNotFoundException, StockNotFoundException;
 
    
 }

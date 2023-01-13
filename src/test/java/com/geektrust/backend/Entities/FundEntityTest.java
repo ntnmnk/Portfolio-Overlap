@@ -1,5 +1,6 @@
 package com.geektrust.backend.Entities;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,16 +12,19 @@ public class FundEntityTest {
     @Test
     @DisplayName("Check whether stock exist return true if stock exist in fund")
     public void chekcStockExist() {
-        String name = "AXIS_MIDCAP";
+        String name = "ICICI_PRU_NIFTY_NEXT_50_INDEX";
         Set<String> stocks = new HashSet<String>();
-        stocks.add("KOTAK MAHINDRA BANK LIMITED");
-        stocks.add("BATA INDIA LIMITED");
-        stocks.add("MINDTREE LIMITED");
-        stocks.add("L&T TECHNOLOGY SERVICES LIMITED");
+        stocks.add("MARICO LIMITED");
+        stocks.add("ACC LIMITED");
+        stocks.add("GAIL (INDIA) LIMITED");
+        stocks.add("INFO EDGE (INDIA) LIMITED");
 
-        Funds fund = new Funds(name, stocks);
-        String test = "KOTAK MAHINDRA BANK LIMITED";
-        assertTrue(fund.getStocks().contains(test));
+        Funds fund = new Funds(name , stocks);
+        String testStock = "ACC LIMITED";
+        //System.out.println(fund.getStocks());
+        assertTrue(fund.getStocks().contains(testStock));
+
+                    
     }
 
 }

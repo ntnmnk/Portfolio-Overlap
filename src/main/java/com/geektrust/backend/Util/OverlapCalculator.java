@@ -14,7 +14,6 @@ public class OverlapCalculator {
         }
         int totalstocks = stockList1.size() + stockList2.size();
 
-        List<String> list = new ArrayList<String>();
 
         // Set<String> commonElements = new HashSet<>();
         // commonElements.addAll(stockList1);

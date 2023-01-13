@@ -60,7 +60,7 @@ public class PortfolioService implements IPortfolioService {
         // stock.
         try {
             fundsRepository.addStocksToFund(fundName, stockName);
-        } catch (RuntimeException e) {
+        } catch (FundNotFoundException e) {
             System.out.println("FUND_NOT_FOUND");
         }
     }

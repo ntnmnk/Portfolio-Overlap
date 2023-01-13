@@ -28,7 +28,15 @@ public class CurrentPortfolioCommand implements ICommand {
 
             portfolioOverlapService.currentPortfolioStocks(stocksList);
         } catch (FundNotFoundException e) {
-            throw new FundNotFoundException("FUND_NOT_FOUND");
+            System.out.println("COMMAND_NOT_FOUND");
+        }
+        catch(NullPointerException e)
+        {
+            System.out.println("COMMAND_NOT_FOUND");
+        }
+        catch (CommandNotFoundException e)
+        {
+            System.out.println("COMMAND_NOT_FOUND");
         }
     }
 

@@ -6,8 +6,8 @@ import java.util.Set;
 
 @Getter
 public class Funds {
-    private String name;
-    private Set<String> stocks;
+    private  String name;
+    @Getter private Set<String> stocks;
     public Funds(){}
     public Funds(String name, Set<String> stocks) {
         this.name = name;

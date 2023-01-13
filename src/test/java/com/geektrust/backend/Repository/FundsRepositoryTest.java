@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.geektrust.backend.Exceptions.FundNotFoundException;
+import com.geektrust.backend.Global.Constants;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 
 public class FundsRepositoryTest {
-    String url="https://geektrust.s3.ap-southeast-1.amazonaws.com/portfolio-overlap/stock_data.json";
+    String url=Constants.url;
     FundsRepository fundsRepository=new FundsRepository(url);
 
     @Test
@@ -45,5 +46,10 @@ public class FundsRepositoryTest {
 
         assertThrows(FundNotFoundException.class, ()->{fundsRepository.getStocksFromFund("UNKNOWN_FUND");});
     }
+    @Test
+    @DisplayName("Testign exception handling when passing an Unknown stock and trying to get list")
+    public void unknownFundHandlingOnAddStockToFundTest(){
 
+        assertThrows(FundNotFoundException.class, ()->{fundsRepository.addStocksToFund("UNKNOWN_FUND", "NOICL");});
+    }
 }

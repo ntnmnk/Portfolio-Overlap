@@ -21,7 +21,7 @@ public class FundsRepository implements IFundsRepository {
 
     public FundsRepository(String url) {
         this.urlString=url;
-       this.deserialisationOfJsonData();
+        this.deserialisationOfJsonData();
     }
 
    
@@ -58,7 +58,7 @@ public class FundsRepository implements IFundsRepository {
             throws FundNotFoundException, StockNotFoundException {
         Set<String> updatedStockList = getStocksFromFund(fundName);
         if (updatedStockList == null) {
-            throw new StockNotFoundException("FUND_NOT_FOUND");
+            throw new FundNotFoundException("FUND_NOT_FOUND");
         }
         updatedStockList.add(stockName);
         return updatedStockList;

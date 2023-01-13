@@ -21,10 +21,15 @@ public class CalculateOverlapCommand implements ICommand {
             String fundForCalculation = tokens.get(1);
 
             portfolioService.calculatePortfolioOverlap(fundForCalculation);
-        } catch (NullPointerException e) {
-            throw new CommandNotFoundException();
         }
-        
+        catch (NullPointerException e) {
+            System.out.println("COMMAND_NOT_FOUND");
+        }
+        catch(Exception e){
+            System.out.println("COMMAND_NOT_FOUND");
+
+        }
+       
     }
     
 }

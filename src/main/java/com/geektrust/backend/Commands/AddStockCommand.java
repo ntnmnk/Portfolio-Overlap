@@ -3,7 +3,6 @@ package com.geektrust.backend.Commands;
 import java.util.List;
 import java.util.stream.Collectors;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
-import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Services.IPortfolioService;
 
 
@@ -25,8 +24,11 @@ public class AddStockCommand implements ICommand {
                     .collect(Collectors.joining(" "));
 
             portfolioService.addStocksToFund(fundName, stockName);
-        } catch (FundNotFoundException e) {
-            throw new FundNotFoundException("FUND_NOT_FOUND");
+        } catch (CommandNotFoundException e) {
+            System.out.println("COMMAND_NOT_FOUND");
+        }
+        catch(NullPointerException e){
+            System.out.println("COMMAND_NOT_FOUND");
         }
 
     }

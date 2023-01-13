@@ -14,9 +14,10 @@ import com.geektrust.backend.Services.PortfolioService;
 public class ApplicationConfig {
 
         
-        private CommandInvoker commandInvoker=new CommandInvoker();
+        private final CommandInvoker commandInvoker=new CommandInvoker();
 
         String url=Constants.url;
+        
         private final IFundsRepository fundsRepository = new FundsRepository(url);
 
         private final IPortfolioService portfolioService =

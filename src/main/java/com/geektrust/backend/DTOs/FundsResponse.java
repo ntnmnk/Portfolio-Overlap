@@ -1,7 +1,6 @@
 package com.geektrust.backend.DTOs;
 
 import java.util.ArrayList;
-import java.util.Set;
 import com.geektrust.backend.Entities.Funds;
 
 public class FundsResponse{
