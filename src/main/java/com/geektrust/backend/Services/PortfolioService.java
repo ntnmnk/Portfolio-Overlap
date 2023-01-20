@@ -2,6 +2,7 @@ package com.geektrust.backend.Services;
 
 import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Exceptions.StockNotFoundException;
+import com.geektrust.backend.Repository.FundsRepository;
 import com.geektrust.backend.Repository.IFundsRepository;
 import com.geektrust.backend.Util.OverlapCalculator;
 
@@ -10,16 +11,18 @@ public class PortfolioService implements IPortfolioService {
 
     private String[] fundNames;
     
-    private IFundsRepository fundsRepository;
+    private FundsRepository fundsRepository;
+    
 
     private OverlapCalculator portfolioOverlapCalculator=new OverlapCalculator();
         
    
-    public PortfolioService(IFundsRepository fundsRepository){
+    public PortfolioService(FundsRepository fundsRepository){
         this.fundsRepository = fundsRepository;
     }
+     
 
-   
+      
 
     @Override
     public void currentPortfolioStocks(String[] fundList) throws FundNotFoundException {

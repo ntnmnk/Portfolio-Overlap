@@ -1,6 +1,5 @@
 package com.geektrust.backend.Entities;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +18,7 @@ public class FundEntityTest {
         stocks.add("GAIL (INDIA) LIMITED");
         stocks.add("INFO EDGE (INDIA) LIMITED");
 
-        Funds fund = new Funds(name , stocks);
+        Fund fund = new Fund(name , stocks);
         String testStock = "ACC LIMITED";
         //System.out.println(fund.getStocks());
         assertTrue(fund.getStocks().contains(testStock));

@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.geektrust.backend.Entities.Funds;
+import com.geektrust.backend.Entities.Fund;
 import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Exceptions.StockNotFoundException;
 import com.geektrust.backend.DTOs.*;
@@ -33,7 +33,7 @@ public class FundsRepository implements IFundsRepository {
             URL url = new URL(this.urlString);
             FundsResponse response = objectMapper.readValue(url, FundsResponse.class);
             this.fundsAndStockMap = response.getFunds().stream()
-                    .collect(Collectors.toMap(Funds::getName, Funds::getStocks));
+                    .collect(Collectors.toMap(Fund::getName, Fund::getStocks));
         } catch (IOException e) {
             e.printStackTrace();
         }

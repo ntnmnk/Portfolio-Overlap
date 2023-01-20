@@ -13,7 +13,7 @@ public class CalculateOverlapCommand implements ICommand {
     public CalculateOverlapCommand(IPortfolioService portfolioService2) {
         this.portfolioService = portfolioService2;
     }
-
+    
 
     @Override
     public void execute(List<String> tokens) throws NullPointerException,CommandNotFoundException{

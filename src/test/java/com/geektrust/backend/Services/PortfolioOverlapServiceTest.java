@@ -1,5 +1,6 @@
 package com.geektrust.backend.Services;
 
+import net.bytebuddy.agent.builder.AgentBuilder.CircularityLock.Global;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -10,6 +11,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Exceptions.StockNotFoundException;
+import com.geektrust.backend.Global.Constants;
+import com.geektrust.backend.Repository.FundsRepository;
 import com.geektrust.backend.Repository.IFundsRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,8 +21,10 @@ import org.junit.jupiter.api.Test;
 
 
 public class PortfolioOverlapServiceTest {
+
+    String urlString=Constants.url;
     
-    IFundsRepository mockStockRepository = new MockStockRepositories();
+    FundsRepository mockStockRepository = new MockStockRepositories(urlString);
     PortfolioService mockPortfolioOverlapService = new PortfolioService(mockStockRepository);
 
     private final PrintStream standardOut = System.out;
@@ -86,7 +91,12 @@ public class PortfolioOverlapServiceTest {
         assertEquals("FUND_NOT_FOUND", byteArrayOutputStream.toString().trim());
     }
 
-    class MockStockRepositories implements IFundsRepository{
+    class MockStockRepositories extends FundsRepository{
+
+        public MockStockRepositories(String url) {
+            super(url);
+            //TODO Auto-generated constructor stub
+        }
 
         Map<String , Set<String>> fundsAndStockMap = Map.ofEntries(
             new AbstractMap.SimpleEntry("UTI_NIFTY_INDEX", Arrays.asList("INFOSYS LIMITED","EPL LIMITED", "ICICI BANK LIMITED", "ICICI LOMBARD GENERAL INSURANCE COMPANY LIMITED",

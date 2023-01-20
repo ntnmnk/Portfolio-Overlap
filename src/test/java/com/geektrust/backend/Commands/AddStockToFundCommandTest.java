@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import com.geektrust.backend.DTOs.FundsResponse;
-import com.geektrust.backend.Entities.Funds;
+import com.geektrust.backend.Entities.Fund;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
 import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Repository.IFundsRepository;

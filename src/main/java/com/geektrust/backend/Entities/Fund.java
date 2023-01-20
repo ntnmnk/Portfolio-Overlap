@@ -5,11 +5,11 @@ import java.util.Set;
 
 
 @Getter
-public class Funds {
+public class Fund {
     private  String name;
     @Getter private Set<String> stocks;
-    public Funds(){}
-    public Funds(String name, Set<String> stocks) {
+    public Fund(){}
+    public Fund(String name, Set<String> stocks) {
         this.name = name;
         this.stocks = stocks;
     }
@@ -34,7 +34,7 @@ public class Funds {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Funds other = (Funds) obj;
+        Fund other = (Fund) obj;
         if (name == null) {
             if (other.name != null)
                 return false;
