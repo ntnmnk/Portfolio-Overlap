@@ -35,7 +35,7 @@ class AppTest {
         "ICICI_PRU_NIFTY_NEXT_50_INDEX PARAG_PARIKH_FLEXI_CAP 7.32%\n";
         //Act
 
-        Geektrust.run(input);
+        App.run(input);
             // TODO Auto-generated catch block
          
         //Assert
@@ -59,8 +59,8 @@ class AppTest {
         "MIRAE_ASSET_EMERGING_BLUECHIP UTI_NIFTY_INDEX 65.52%\n";
         //Act
 
-        Geektrust.run(input);
-            // TODO Auto-generated catch block
+        App.run(input);
+            
          
         //Assert
         Assertions.assertEquals(expectedOutput.trim(),outputStreamCaptor.toString().trim());
