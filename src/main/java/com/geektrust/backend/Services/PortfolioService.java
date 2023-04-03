@@ -1,8 +1,12 @@
 package com.geektrust.backend.Services;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Exceptions.StockNotFoundException;
-import com.geektrust.backend.Repository.FundsRepository;
 import com.geektrust.backend.Repository.IFundsRepository;
 import com.geektrust.backend.Util.OverlapCalculator;
 
@@ -10,51 +14,56 @@ import com.geektrust.backend.Util.OverlapCalculator;
 public class PortfolioService implements IPortfolioService {
 
     private String[] fundNames;
-    
-    private FundsRepository fundsRepository;
-    
 
-    private OverlapCalculator portfolioOverlapCalculator=new OverlapCalculator();
-        
-   
-    public PortfolioService(FundsRepository fundsRepository){
+    private IFundsRepository fundsRepository;
+
+
+    private OverlapCalculator portfolioOverlapCalculator = new OverlapCalculator();
+
+
+    public PortfolioService(IFundsRepository fundsRepository) {
         this.fundsRepository = fundsRepository;
     }
-     
 
-      
+
 
     @Override
     public void currentPortfolioStocks(String[] fundList) throws FundNotFoundException {
         // Adding given funds to user's portfolio
-        if (fundList == null) {
+        if (fundList == null||fundList.length==0) {
             throw new FundNotFoundException("FUND_NOT_FOUND");
         }
-        this.fundNames = fundList;
+        fundNames = fundList;
     }
 
     @Override
-    public void calculatePortfolioOverlap(String fundsToCompare) {
-        //  Calculating overlap and overlap percent of given funds with the funds user having
-        // currently
-        try {
-            for (String fund : this.fundNames) {
+    public List<String> calculatePortfolioOverlap(String fundsToCompare) throws FundNotFoundException {
 
-                String overlapPercentage = portfolioOverlapCalculator.overlap(
-                        fundsRepository.getStocksFromFund(fund),
-                        fundsRepository.getStocksFromFund(fundsToCompare));
+        List<String> overlaps = new ArrayList<>();
 
-                if (Double.parseDouble(overlapPercentage) > (double)0)
-                    System.out.println(
-                            fundsToCompare + " " + fund + " " + overlapPercentage + "%");
-                else
-                    continue;
-            }
-        } catch (FundNotFoundException e) {
-            System.out.println("FUND_NOT_FOUND");
+       
+        Set<String> comparedStocks = fundsRepository.getStocksFromFund(fundsToCompare);
+        if (comparedStocks.isEmpty()) {
+            throw new FundNotFoundException("FUND_NOT_FOUND");
         }
-    }
+    
+        Arrays.stream(fundNames)
+                .filter(fund -> !fund.equals(fundsToCompare))
+                .forEach(fund -> {
+                    try {
+                        Set<String> fundStocks = fundsRepository.getStocksFromFund(fund);
+                        String overlapPercentage = portfolioOverlapCalculator.overlap(fundStocks, comparedStocks);
+                        if (Double.parseDouble(overlapPercentage) > 0.0) {
+                            overlaps.add(fundsToCompare + " " + fund + " " + overlapPercentage + "%");
+                        }
+                    } catch (FundNotFoundException e) {
+                        // Ignore the fund if it is not found
+                    }
+                });
+    
+        return overlaps;
 
+    }
 
     @Override
     public void addStocksToFund(String fundName, String stockName)

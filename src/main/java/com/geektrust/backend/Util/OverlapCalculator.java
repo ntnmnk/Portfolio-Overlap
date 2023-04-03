@@ -10,7 +10,7 @@ public class OverlapCalculator {
     public String overlap(Set<String> stockList1, Set<String> stockList2) {
 
         if (stockList1 == null || stockList2 == null) {
-            return "One of list is empty, please check the input";
+            return "Please check the input";
         }
         int totalstocks = stockList1.size() + stockList2.size();
 

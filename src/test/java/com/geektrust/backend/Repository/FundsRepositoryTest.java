@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Global.Constants;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,8 +15,15 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 
 public class FundsRepositoryTest {
-    String url=Constants.url;
-    FundsRepository fundsRepository=new FundsRepository(url);
+    String urlString=Constants.url;
+    private FundsRepository fundsRepository;
+
+    @BeforeEach
+    void setUp() throws Exception {
+       
+        this.fundsRepository = new FundsRepository(urlString);
+    }
+
 
     @Test
     @DisplayName("Checking if the amount of funds in api are equal to te fund method is accessing")

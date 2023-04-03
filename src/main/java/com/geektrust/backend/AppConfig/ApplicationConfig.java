@@ -6,6 +6,7 @@ import com.geektrust.backend.Commands.CommandInvoker;
 import com.geektrust.backend.Commands.CurrentPortfolioCommand;
 import com.geektrust.backend.Global.Constants;
 import com.geektrust.backend.Repository.FundsRepository;
+import com.geektrust.backend.Repository.IFundsRepository;
 import com.geektrust.backend.Services.IPortfolioService;
 import com.geektrust.backend.Services.PortfolioService;
 
@@ -17,7 +18,7 @@ public class ApplicationConfig {
 
         String url=Constants.url;
         
-        private final FundsRepository fundsRepository = new FundsRepository(url);
+        private final IFundsRepository fundsRepository = new FundsRepository(url);
         
         
         private final IPortfolioService portfolioService =

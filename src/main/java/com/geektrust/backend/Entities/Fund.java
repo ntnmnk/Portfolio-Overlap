@@ -14,9 +14,6 @@ public class Fund {
         this.stocks = stocks;
     }
     
-    
-    
-
 
     @Override
     public int hashCode() {
@@ -26,6 +23,8 @@ public class Fund {
         result = prime * result + ((stocks == null) ? 0 : stocks.hashCode());
         return result;
     }
+
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

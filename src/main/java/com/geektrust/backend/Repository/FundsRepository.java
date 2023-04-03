@@ -16,27 +16,31 @@ public class FundsRepository implements IFundsRepository {
     
 
     private final String urlString;
-    private Map<String, Set<String>> fundsAndStockMap;
+    private final Map<String, Set<String>> fundsAndStockMap;
 
 
     public FundsRepository(String url) {
         this.urlString=url;
-        this.deserialisationOfJsonData();
+        this.fundsAndStockMap = deserializeFundsResponse();
+
     }
 
    
     // Converting Json data to java readable object
-    public void deserialisationOfJsonData() {
-        
+    public Map<String, Set<String>>  deserializeFundsResponse()  {
+        Map<String, Set<String>> map;
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             URL url = new URL(this.urlString);
             FundsResponse response = objectMapper.readValue(url, FundsResponse.class);
-            this.fundsAndStockMap = response.getFunds().stream()
+            map = response.getFunds().stream()
                     .collect(Collectors.toMap(Fund::getName, Fund::getStocks));
+    
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new FundNotFoundException("FUND_NOT_FUND");
         }
+        return map;
+
     }
 
     public Map<String, Set<String>> getFundAndStockMap() {
@@ -47,11 +51,11 @@ public class FundsRepository implements IFundsRepository {
     @Override
     public Set<String> getStocksFromFund(String fundName) throws FundNotFoundException {
         Set<String> stockListOfFund = this.fundsAndStockMap.get(fundName);
-        if (stockListOfFund == null) {
+        if (stockListOfFund == null || stockListOfFund.isEmpty()){
             throw new FundNotFoundException("FUND_NOT_FOUND");
         }
         return stockListOfFund;
-    }
+}
 
     @Override
     public Set<String> addStocksToFund(String fundName, String stockName)
