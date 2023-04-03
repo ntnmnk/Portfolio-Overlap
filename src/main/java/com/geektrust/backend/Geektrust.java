@@ -11,7 +11,7 @@ import com.geektrust.backend.Commands.CommandInvoker;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
 
 
-public class App {
+public class Geektrust {
     // To run the application ./gradlew run --args="input.txt"
    
     

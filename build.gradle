@@ -8,6 +8,21 @@ group = 'com.geektrust'
 version = '1.0'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+test { ///Please do not change this
+    useJUnitPlatform()
+    testLogging {
+        events "PASSED", "SKIPPED", "FAILED", "STANDARD_ERROR"
+    }
+    finalizedBy jacocoTestReport // report is always generated after tests run
+    afterSuite { desc, result ->
+        if (!desc.parent)
+            println("${result.resultType} " +
+                "(${result.testCount} tests, " +
+                "${result.successfulTestCount} successes, " +
+                "${result.failedTestCount} failures, " +
+                "${result.skippedTestCount} skipped)")
+        }
+}
 
 jacoco { //Please do not change this
     toolVersion = "0.8.4"
