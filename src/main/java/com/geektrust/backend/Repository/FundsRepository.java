@@ -44,6 +44,10 @@ public class FundsRepository implements IFundsRepository {
         return map;
 
     }
+    private Map<String, Set<String>> mapFundsResponseDto(FundsResponse responseDto) {
+        return responseDto.getFunds().stream()
+                .collect(Collectors.toMap(Fund::getName, Fund::getStocks));
+    }
 
     public Map<String, Set<String>> getFundAndStockMap() {
         return fundsAndStockMap;

@@ -1,18 +1,27 @@
 package com.geektrust.backend.DTOs;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import com.geektrust.backend.Entities.Fund;
 
 public class FundsResponse{
+     private List<Fund> funds;
+
+     public FundsResponse() {}
+ 
     
-     public ArrayList<Fund> funds;
-
-     public ArrayList<Fund> getFunds() {
+     public List<Fund> getFunds() {
           return funds;
-     }
-
-     public void setFunds(ArrayList<Fund> funds) {
+      }
+  
+      public void setFunds(List<Fund> funds) {
           this.funds = funds;
-     }
+      }
+  
+
+     
+    
+     
 
 }

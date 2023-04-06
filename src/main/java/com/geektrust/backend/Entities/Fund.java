@@ -1,17 +1,23 @@
 package com.geektrust.backend.Entities;
 
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 
 public class Fund {
-    private final  String name;
-    private final Set<String> stocks;
+    private final   String name;
+    private final  Set<String> stocks;
 
 
-    public Fund(String name, Set<String> stocks) {
+    @JsonCreator
+    public Fund(@JsonProperty("name") String name, 
+                   @JsonProperty("stocks") Set<String> stocks) {
         this.name = name;
         this.stocks = stocks;
     }
+
     
 
   
