@@ -2,7 +2,9 @@ package com.geektrust.backend.Repository;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -50,23 +52,27 @@ public class FundsRepository implements IFundsRepository {
 
     @Override
     public Set<String> getStocksFromFund(String fundName) throws FundNotFoundException {
-        Set<String> stockListOfFund = this.fundsAndStockMap.get(fundName);
-        if (stockListOfFund == null || stockListOfFund.isEmpty()){
-            throw new FundNotFoundException("FUND_NOT_FOUND");
-        }
-        return stockListOfFund;
+        Set<String> stockListOfFund = Optional.ofNullable(this.fundsAndStockMap.get(fundName))
+        .orElse(Collections.emptySet());
+        if (stockListOfFund.isEmpty()) {
+               throw new FundNotFoundException("FUND_NOT_FOUND");
+}
+return stockListOfFund;
+
 }
 
     @Override
     public Set<String> addStocksToFund(String fundName, String stockName)
-            throws FundNotFoundException, StockNotFoundException {
-        Set<String> updatedStockList = getStocksFromFund(fundName);
-        if (updatedStockList == null) {
-            throw new FundNotFoundException("FUND_NOT_FOUND");
-        }
-        updatedStockList.add(stockName);
-        return updatedStockList;
-    }
+            throws FundNotFoundException, StockNotFoundException ,StockAlreadyExistsException{
+                 
+                Set<String> updatedStockList = getStocksFromFund(fundName);
+                if(updatedStockList == null){
+                    throw new StockNotFoundException("STOCKS_NOT_FOUND");
+                }
+                updatedStockList.add(stockName);
+                return updatedStockList;
+            }
+        
 
 
 }

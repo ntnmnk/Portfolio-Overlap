@@ -33,8 +33,10 @@ jacocoTestReport { //Please do not change this
     reports {
         xml.enabled true
         csv.enabled false
-        html.enabled false
+        html.enabled true
+                html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
         xml.destination file("./jacoco.xml")
+        html.destination file("${buildDir}/jacoco/html") // set the destination directory for HTML reports
     }
 }
 

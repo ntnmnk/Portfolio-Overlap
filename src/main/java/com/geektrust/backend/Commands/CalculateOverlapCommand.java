@@ -34,9 +34,7 @@ public class CalculateOverlapCommand implements ICommand {
         catch(FundNotFoundException e){
             System.out.println("FUND_NOT_FOUND");
         }
-        catch (NullPointerException e) {
-            System.out.println("COMMAND_NOT_FOUND");
-        }
+       
         catch(Exception e){
             System.out.println("COMMAND_NOT_FOUND");
 

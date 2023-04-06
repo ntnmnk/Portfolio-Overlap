@@ -1,8 +1,12 @@
 package com.geektrust.backend.Repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.HashSet;
+import java.util.Set;
+import com.geektrust.backend.Entities.Fund;
 import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Global.Constants;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,4 +64,19 @@ public class FundsRepositoryTest {
 
         assertThrows(FundNotFoundException.class, ()->{fundsRepository.addStocksToFund("UNKNOWN_FUND", "NOICL");});
     }
+
+   
+
+   
+
+@Test
+@DisplayName("Testing size of new stocklist of a fund after addition of stock already exist in a given fund")
+public void addStocksToDublicateFundTest(){
+    String fundName = "SBI_LARGE_&_MIDCAP";
+    String stockName = "PVR LIMITED";
+    fundsRepository.addStocksToFund(fundName, stockName);
+    assertEquals(53, fundsRepository.getStocksFromFund(fundName).size());
+}
+
+
 }

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class PortfolioCalculatorTest {
 
-    OverlapCalculator overlapCalculator=new OverlapCalculator();
+    PortfolioOverlapCalculator overlapCalculator=new PortfolioOverlapCalculator();
     
     @Test
     public void TestCalculate(){

@@ -23,6 +23,7 @@ import com.geektrust.backend.DTOs.FundsResponse;
 import com.geektrust.backend.Entities.Fund;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
 import com.geektrust.backend.Exceptions.FundNotFoundException;
+import com.geektrust.backend.Exceptions.StockNotFoundException;
 import com.geektrust.backend.Repository.IFundsRepository;
 import com.geektrust.backend.Services.IPortfolioService;
 import com.geektrust.backend.Services.PortfolioService;
@@ -47,36 +48,81 @@ public class AddStockToFundCommandTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     
-
     @Mock
-    IFundsRepository fundsRepository;
-    @Mock
-    PortfolioService portOverlapServiceMock;
-   
+    PortfolioService portfolioServiceMock;
     @InjectMocks
-    AddStockCommand addStockCommand;
+    AddStockCommand addStockCommand ;
+
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
+        addStockCommand = new AddStockCommand(portfolioServiceMock);
+
         System.setOut(new PrintStream(outputStreamCaptor));
     }   
+   
+
+   
+
     
     @Test
     public void testExecute_withNullParameter() throws CommandNotFoundException {
         List<String> tokens = null;
-        addStockCommand.execute(tokens);
-        verify(portOverlapServiceMock, never()).addStocksToFund(anyString(), anyString());
+        assertThrows(CommandNotFoundException.class, () -> addStockCommand.execute(tokens));
+        verify(portfolioServiceMock, never()).addStocksToFund(anyString(), anyString());
     }
+    
+   
+   
+
+@Test
+@DisplayName("execute should call addStocksToFund method of portfolioService with valid input")
+void testExecuteWithValidInput() throws Exception {
+    List<String> tokens = new ArrayList<>(Arrays.asList("ADD_STOCK", "fund", "stock"));
+    addStockCommand.execute(tokens);
+    verify(portfolioServiceMock).addStocksToFund("fund", "stock");
+}
+
+@Test
+@DisplayName("execute should throw CommandNotFoundException when commandName is not ADD_STOCK")
+void testExecuteWithInvalidCommandName() {
+    List<String> tokens = new ArrayList<>(Arrays.asList("INVALID_COMMAND", "fund", "stock"));
+    assertThrows(CommandNotFoundException.class, () -> addStockCommand.execute(tokens));
+}
+@Test
+void execute_validInput_callsAddStocksToFund() throws Exception {
+    List<String> tokens = Arrays.asList("ADD_STOCK", "FUND_NAME", "STOCK_NAME");
+    doNothing().when(portfolioServiceMock).addStocksToFund(anyString(), anyString());
+
+    addStockCommand.execute(tokens);
+
+    // Verify that addStocksToFund was called with the correct arguments
+    List<String> expected = Arrays.asList("FUND_NAME", "STOCK_NAME");
+    String fundName = expected.get(0);
+    String stockName = expected.get(1);
+    assertEquals(fundName, "FUND_NAME");
+    assertEquals(stockName, "STOCK_NAME");
+}
+
+
 
     @Test
-    public void testExecute_withCommandNotFoundException() throws CommandNotFoundException {
-        String fundName = "Fund1";
-        List<String> tokens = Arrays.asList("ADD_STOCK", fundName);
-        doThrow(new CommandNotFoundException()).when(portOverlapServiceMock).addStocksToFund(fundName, "");
-        addStockCommand.execute(tokens);
-        verify(portOverlapServiceMock, times(1)).addStocksToFund(fundName, "");
+public void execute_addStockToFund() throws CommandNotFoundException {
+    List<String> tokens = new ArrayList<>(Arrays.asList("ADD_STOCK", "AXIS_BLUECHIP", "HDFC BANK LIMITED"));
+
+    addStockCommand.execute(tokens);
+
+    verify(portfolioServiceMock, times(1)).addStocksToFund("AXIS_BLUECHIP", "HDFC BANK LIMITED");
+
+}
+
+
+@AfterEach
+    public void restoreStreams() {
+        System.setOut(standardOut);
     }
+
 
 }
 

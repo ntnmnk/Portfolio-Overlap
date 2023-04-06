@@ -10,25 +10,36 @@ import com.geektrust.backend.Services.IPortfolioService;
 public class CurrentPortfolioCommand implements ICommand {
 
     
-    private IPortfolioService portfolioOverlapService;
+    private final IPortfolioService portfolioOverlapService;
 
     
     public CurrentPortfolioCommand(IPortfolioService portfolioService) {
         this.portfolioOverlapService = portfolioService;
     }
+    
 
     // Execute the registered Command
     @Override
     public void execute(List<String> tokens) throws CommandNotFoundException, NullPointerException {
-
+        if(tokens==null) throw new CommandNotFoundException("COMMAND_NOT_FOUND");
+        String commandName=tokens.get(0);
+       
         try {
+            if (!commandName.equals("CURRENT_PORTFOLIO")) {
+                throw new CommandNotFoundException("COMMAND_NOT_FOUND");
+            }
             String[] temp = new String[tokens.size()];
-            tokens.toArray(temp);
-            String[] stocksList = Arrays.copyOfRange(temp, 1, temp.length);
+            // if (temp.length <= 1 || temp[1] == null) {
+            //     throw new FundNotFoundException("FUND_NOT_FOUND");
+            // }
+    
 
-            portfolioOverlapService.currentPortfolioStocks(stocksList);
+            tokens.toArray(temp);
+            String[] fundList = Arrays.copyOfRange(temp, 1, temp.length);
+
+            portfolioOverlapService.currentPortfolioStocks(fundList);
         } catch (FundNotFoundException e) {
-            System.out.println("COMMAND_NOT_FOUND");
+            System.out.println("FUND_NOT_FOUND");
         }
         catch(NullPointerException e)
         {
@@ -37,6 +48,7 @@ public class CurrentPortfolioCommand implements ICommand {
         catch (CommandNotFoundException e)
         {
             System.out.println("COMMAND_NOT_FOUND");
+        
         }
     }
 

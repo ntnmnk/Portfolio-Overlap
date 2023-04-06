@@ -2,45 +2,59 @@ package com.geektrust.backend.Commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import com.geektrust.backend.Exceptions.CommandNotFoundException;
 import com.geektrust.backend.Exceptions.FundNotFoundException;
+import com.geektrust.backend.Repository.FundsRepository;
+import com.geektrust.backend.Repository.IFundsRepository;
 import com.geektrust.backend.Services.PortfolioService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class CalculateOverlapCommandTest {
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     
     @Mock
-    PortfolioService portOverlapServiceMock;
+    IFundsRepository fundsRepository;
 
     @InjectMocks
+    PortfolioService portOverlapServiceMock;
+
     CalculateOverlapCommand calculateOverlapCommand;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
        // calculateOverlapCommand = new CalculateOverlapCommand(portOverlapServiceMock);
-
-
+       portOverlapServiceMock = mock(PortfolioService.class);
+        calculateOverlapCommand = new CalculateOverlapCommand(portOverlapServiceMock);
         System.setOut(new PrintStream(outputStreamCaptor));
+
+        
     }   
     @Test
     @DisplayName("addStockCommand execute methodshould return (Catching Null Pointer Exception) There is no Command if there is no command found")
@@ -59,35 +73,25 @@ public class CalculateOverlapCommandTest {
         assertEquals("COMMAND_NOT_FOUND", outputStreamCaptor.toString().trim());
     
     }
+   
+
 //     @Test
 // @DisplayName("Testing calculatePortfolioOverlap percent when funds are not in list")
 // public void calculatePortfolioOverlapWhenFundsAreNotInListTest() {
        
 //     String[] fundList = {"UTI_NIFTY_INDEX", "AXIS_MIDCAP", "PARAG_PARIKH_FLEXI_CAP"};
-//     portOverlapServiceMock.currentPortfolioStocks(fundList);
-//     String fundForCalculation = "NAVI_FUND";
-//     assertThrows(FundNotFoundException.class, () -> {
-//      calculateOverlapCommand.execute(Arrays.asList("CALCULATE_OVERLAP", fundForCalculation));
-//     });
-// }
-// @Test
-// @DisplayName("Testing calculatePortfolioOverlap percent when funds are not in list")
-// public void calculatePortfolioOverlapWhenFundsAreNotInListTest4() throws FundNotFoundException {
-//         // Arrange
-//         String[] fundList = {"UTI_NIFTY_INDEX", "AXIS_MIDCAP", "PARAG_PARIKH_FLEXI_CAP"};
-//         Mockito.doNothing().when(portOverlapServiceMock).currentPortfolioStocks(fundList);
+//         doNothing().when(portOverlapServiceMock).currentPortfolioStocks(fundList);
 //         String fundForCalculation = "NAVI_FUND";
-//         List<String> tokens = new ArrayList<>();
-//         tokens.add("CALCULATE_OVERLAP");
-//         tokens.add(fundForCalculation);
-    
-//         // Act & Assert
-//         assertThrows(FundNotFoundException.class, () -> {
-//             calculateOverlapCommand.execute(tokens);
+//         when(portOverlapServiceMock.calculatePortfolioOverlap(fundForCalculation)).thenThrow(new FundNotFoundException());
+//         Throwable exception = assertThrows(FundNotFoundException.class, () -> {
+//          calculateOverlapCommand.execute(Arrays.asList("CALCULATE_OVERLAP", fundForCalculation));
 //         });
+//         assertEquals("FUND_NOT_FOUND", outputStreamCaptor.toString().trim());
+//         System.out.println(exception.getMessage());
 // }
 
-   
+
+
    @Test
     public void calculatePortfolioOverlapWhenFundsAreInListTest2() throws FundNotFoundException {
         String[] fundList = {"UTI_NIFTY_INDEX", "AXIS_MIDCAP", "PARAG_PARIKH_FLEXI_CAP"};

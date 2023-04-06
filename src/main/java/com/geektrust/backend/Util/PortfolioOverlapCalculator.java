@@ -4,15 +4,15 @@ import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class OverlapCalculator {
+public class PortfolioOverlapCalculator implements IPortfolioOverlapCalculator  {
 
+    @Override
+    public String overlap(Set<String> currentFundStocks, Set<String> fundForCalculationStocks) {
 
-    public String overlap(Set<String> stockList1, Set<String> stockList2) {
-
-        if (stockList1 == null || stockList2 == null) {
+        if (currentFundStocks == null || fundForCalculationStocks == null) {
             return "Please check the input";
         }
-        int totalstocks = stockList1.size() + stockList2.size();
+        int totalstocks = currentFundStocks.size() + fundForCalculationStocks.size();
 
 
         // Set<String> commonElements = new HashSet<>();
@@ -22,7 +22,7 @@ public class OverlapCalculator {
 
        
         Set<String> intersection =
-                stockList1.stream().filter(i -> stockList2.contains(i)).collect(Collectors.toSet());
+        currentFundStocks.stream().filter(i -> fundForCalculationStocks.contains(i)).collect(Collectors.toSet());
 
         int commonCount = intersection.size();
         DecimalFormat df = new DecimalFormat("#.##");
