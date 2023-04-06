@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.geektrust.backend.Entities.Fund;
@@ -50,10 +49,7 @@ public class FundsRepository implements IFundsRepository {
         return map;
 
     }
-    private Map<String, Set<String>> mapFundsResponseDto(FundsResponse responseDto) {
-        return responseDto.getFunds().stream()
-                .collect(Collectors.toMap(Fund::getName, Fund::getStocks));
-    }
+    
 
     public Map<String, Set<String>> getFundAndStockMap() {
         return fundsAndStockMap;

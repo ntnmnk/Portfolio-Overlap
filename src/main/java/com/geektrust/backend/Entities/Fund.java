@@ -8,7 +8,6 @@ public class Fund implements IFund {
     private  Set<String> stocks;
 
 
-    public Fund(){}
     public Fund(String name, Set<String> stocks) {
         this.name = name;
         this.stocks = stocks;
