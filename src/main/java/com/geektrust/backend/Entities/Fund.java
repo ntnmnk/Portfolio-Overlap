@@ -4,16 +4,15 @@ import java.util.Set;
 
 
 public class Fund implements IFund {
-    private final String name;
-    private final Set<String> stocks;
+    private  String name;
+    private  Set<String> stocks;
 
 
+    public Fund(){}
     public Fund(String name, Set<String> stocks) {
         this.name = name;
         this.stocks = stocks;
     }
-
-    
 
   
     public String getName() {
