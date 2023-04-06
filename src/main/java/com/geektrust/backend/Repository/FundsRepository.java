@@ -7,7 +7,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.geektrust.backend.Entities.Fund;
 import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Exceptions.StockNotFoundException;
@@ -32,11 +34,15 @@ public class FundsRepository implements IFundsRepository {
     public Map<String, Set<String>>  deserializeFundsResponse()  {
         Map<String, Set<String>> map;
         ObjectMapper objectMapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(Fund.class, new FundDeserializer());
+        objectMapper.registerModule(module);
         try {
             URL url = new URL(this.urlString);
             FundsResponse response = objectMapper.readValue(url, FundsResponse.class);
             map = response.getFunds().stream()
                     .collect(Collectors.toMap(Fund::getName, Fund::getStocks));
+    
     
         } catch (IOException e) {
             throw new FundNotFoundException("FUND_NOT_FUND");
