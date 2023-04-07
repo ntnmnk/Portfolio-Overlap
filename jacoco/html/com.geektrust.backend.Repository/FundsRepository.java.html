@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FundsRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">backend</a> &gt; <a href="index.source.html" class="el_package">com.geektrust.backend.Repository</a> &gt; <span class="el_source">FundsRepository.java</span></div><h1>FundsRepository.java</h1><pre class="source lang-java linenums">package com.geektrust.backend.Repository;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.geektrust.backend.Entities.Fund;
+import com.geektrust.backend.Exceptions.FundNotFoundException;
+import com.geektrust.backend.Exceptions.StockNotFoundException;
+import com.geektrust.backend.DTOs.*;
+
+
+public class FundsRepository implements IFundsRepository {
+    
+
+    private final String urlString;
+    private final Map&lt;String, Set&lt;String&gt;&gt; fundsAndStockMap;
+
+
+<span class="fc" id="L25">    public FundsRepository(String url) {</span>
+<span class="fc" id="L26">        this.urlString=url;</span>
+<span class="fc" id="L27">        this.fundsAndStockMap = deserializeFundsResponse();</span>
+
+<span class="fc" id="L29">    }</span>
+
+   
+    // Converting Json data to java readable object
+    public Map&lt;String, Set&lt;String&gt;&gt;  deserializeFundsResponse()  {
+        Map&lt;String, Set&lt;String&gt;&gt; map;
+<span class="fc" id="L35">        ObjectMapper objectMapper = new ObjectMapper();</span>
+<span class="fc" id="L36">        SimpleModule module = new SimpleModule();</span>
+<span class="fc" id="L37">        module.addDeserializer(Fund.class, new FundDeserializer());</span>
+<span class="fc" id="L38">        objectMapper.registerModule(module);</span>
+        try {
+<span class="fc" id="L40">            URL url = new URL(this.urlString);</span>
+<span class="fc" id="L41">            FundsResponse response = objectMapper.readValue(url, FundsResponse.class);</span>
+<span class="fc" id="L42">            map = response.getFunds().stream()</span>
+<span class="fc" id="L43">                    .collect(Collectors.toMap(Fund::getName, Fund::getStocks));</span>
+    
+    
+<span class="nc" id="L46">        } catch (IOException e) {</span>
+<span class="nc" id="L47">            throw new FundNotFoundException(&quot;FUND_NOT_FUND&quot;);</span>
+<span class="fc" id="L48">        }</span>
+<span class="fc" id="L49">        return map;</span>
+
+    }
+    
+
+    public Map&lt;String, Set&lt;String&gt;&gt; getFundAndStockMap() {
+<span class="fc" id="L55">        return fundsAndStockMap;</span>
+    }
+
+
+    @Override
+    public Set&lt;String&gt; getStocksFromFund(String fundName) throws FundNotFoundException {
+<span class="fc" id="L61">        Set&lt;String&gt; stockListOfFund = Optional.ofNullable(this.fundsAndStockMap.get(fundName))</span>
+<span class="fc" id="L62">        .orElse(Collections.emptySet());</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (stockListOfFund.isEmpty()) {</span>
+<span class="fc" id="L64">               throw new FundNotFoundException(&quot;FUND_NOT_FOUND&quot;);</span>
+}
+<span class="fc" id="L66">return stockListOfFund;</span>
+
+}
+
+    @Override
+    public Set&lt;String&gt; addStocksToFund(String fundName, String stockName)
+            throws FundNotFoundException, StockNotFoundException ,StockAlreadyExistsException{
+                 
+<span class="fc" id="L74">                Set&lt;String&gt; updatedStockList = getStocksFromFund(fundName);</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">                if(updatedStockList == null){</span>
+<span class="nc" id="L76">                    throw new StockNotFoundException(&quot;STOCKS_NOT_FOUND&quot;);</span>
+                }
+<span class="fc" id="L78">                updatedStockList.add(stockName);</span>
+<span class="fc" id="L79">                return updatedStockList;</span>
+            }
+        
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

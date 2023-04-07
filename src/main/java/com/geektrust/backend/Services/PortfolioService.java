@@ -15,7 +15,7 @@ import com.geektrust.backend.Util.PortfolioOverlapCalculator;
 
 public class PortfolioService implements IPortfolioService {
 
-    private String[] fundNames;
+    private  String[] fundNames;
 
     private final IFundsRepository fundsRepository;
 
@@ -42,10 +42,7 @@ public class PortfolioService implements IPortfolioService {
     public List<String> calculatePortfolioOverlap(String fundForCalculation) {
         List<String> overlapList = new ArrayList<>();
         for (String fund : this.fundNames) {
-            Set<String> currentFundStocks = fundsRepository.getStocksFromFund(fund);
-            Set<String> fundForCalculationStocks = fundsRepository.getStocksFromFund(fundForCalculation);
-            String overlapPercentage = portfolioOverlapCalculator.overlap(currentFundStocks, fundForCalculationStocks);
-    
+            String overlapPercentage = calculateOverlapPercentage(fund, fundForCalculation);
             if (Double.parseDouble(overlapPercentage) > 0) {
                 overlapList.add(fundForCalculation + " " + fund + " " + overlapPercentage + "%");
             }
@@ -54,7 +51,15 @@ public class PortfolioService implements IPortfolioService {
             throw new FundNotFoundException("FUND_NOT_FOUND");
         }
         return overlapList;
-        }      
+    
+        }  
+          
+        private String calculateOverlapPercentage(String fund1, String fund2) {
+            Set<String> fund1Stocks = fundsRepository.getStocksFromFund(fund1);
+            Set<String> fund2Stocks = fundsRepository.getStocksFromFund(fund2);
+            return portfolioOverlapCalculator.overlap(fund1Stocks, fund2Stocks);
+        }
+          
     
 
 

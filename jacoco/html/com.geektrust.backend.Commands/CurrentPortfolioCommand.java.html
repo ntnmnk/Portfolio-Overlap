@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CurrentPortfolioCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">backend</a> &gt; <a href="index.source.html" class="el_package">com.geektrust.backend.Commands</a> &gt; <span class="el_source">CurrentPortfolioCommand.java</span></div><h1>CurrentPortfolioCommand.java</h1><pre class="source lang-java linenums">package com.geektrust.backend.Commands;
+
+
+import java.util.Arrays;
+import java.util.List;
+import com.geektrust.backend.Exceptions.CommandNotFoundException;
+import com.geektrust.backend.Exceptions.FundNotFoundException;
+import com.geektrust.backend.Services.IPortfolioService;
+
+public class CurrentPortfolioCommand implements ICommand {
+
+    
+    private final IPortfolioService portfolioOverlapService;
+
+    
+<span class="fc" id="L16">    public CurrentPortfolioCommand(IPortfolioService portfolioService) {</span>
+<span class="fc" id="L17">        this.portfolioOverlapService = portfolioService;</span>
+<span class="fc" id="L18">    }</span>
+    
+
+    // Execute the registered Command
+    @Override
+    public void execute(List&lt;String&gt; tokens) throws CommandNotFoundException, NullPointerException {
+<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if(tokens==null) throw new CommandNotFoundException(&quot;COMMAND_NOT_FOUND&quot;);</span>
+<span class="fc" id="L25">        String commandName=tokens.get(0);</span>
+       
+        try {
+<span class="fc bfc" id="L28" title="All 2 branches covered.">            if (!commandName.equals(&quot;CURRENT_PORTFOLIO&quot;)) {</span>
+<span class="fc" id="L29">                throw new CommandNotFoundException(&quot;COMMAND_NOT_FOUND&quot;);</span>
+            }
+<span class="fc" id="L31">            String[] temp = new String[tokens.size()];</span>
+            // if (temp.length &lt;= 1 || temp[1] == null) {
+            //     throw new FundNotFoundException(&quot;FUND_NOT_FOUND&quot;);
+            // }
+    
+
+<span class="fc" id="L37">            tokens.toArray(temp);</span>
+<span class="fc" id="L38">            String[] fundList = Arrays.copyOfRange(temp, 1, temp.length);</span>
+
+<span class="fc" id="L40">            portfolioOverlapService.currentPortfolioStocks(fundList);</span>
+<span class="nc" id="L41">        } catch (FundNotFoundException e) {</span>
+<span class="nc" id="L42">            System.out.println(&quot;FUND_NOT_FOUND&quot;);</span>
+        }
+<span class="nc" id="L44">        catch(NullPointerException e)</span>
+        {
+<span class="nc" id="L46">            System.out.println(&quot;COMMAND_NOT_FOUND&quot;);</span>
+        }
+<span class="fc" id="L48">        catch (CommandNotFoundException e)</span>
+        {
+<span class="fc" id="L50">            System.out.println(&quot;COMMAND_NOT_FOUND&quot;);</span>
+        
+<span class="pc" id="L52">        }</span>
+<span class="fc" id="L53">    }</span>
+
+
+
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

@@ -37,13 +37,15 @@ public class AddStockCommand implements ICommand {
                 portfolioService.addStocksToFund(fundName, stockName);
             }
            
-        
     
-            
+            catch (CommandNotFoundException e) {
+                System.out.println("COMMAND_NOT_FOUND");
+            }
+            catch(NullPointerException e){
+                System.out.println("COMMAND_NOT_FOUND");
+            }
     
-         catch (CommandNotFoundException | FundNotFoundException | StockNotFoundException e) {
-            System.out.println(e.getMessage());
         }
     }    
-    }
+    
 

@@ -29,13 +29,10 @@ public class CurrentPortfolioCommand implements ICommand {
                 throw new CommandNotFoundException("COMMAND_NOT_FOUND");
             }
             String[] temp = new String[tokens.size()];
-            // if (temp.length <= 1 || temp[1] == null) {
-            //     throw new FundNotFoundException("FUND_NOT_FOUND");
-            // }
-    
-
             tokens.toArray(temp);
             String[] fundList = Arrays.copyOfRange(temp, 1, temp.length);
+
+           
 
             portfolioOverlapService.currentPortfolioStocks(fundList);
         } catch (FundNotFoundException e) {

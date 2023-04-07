@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Fund.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">backend</a> &gt; <a href="index.source.html" class="el_package">com.geektrust.backend.Entities</a> &gt; <span class="el_source">Fund.java</span></div><h1>Fund.java</h1><pre class="source lang-java linenums">package com.geektrust.backend.Entities;
+
+import java.util.Set;
+
+
+public final class Fund {
+    
+    private final String name;
+    private final Set&lt;String&gt; stocks;
+
+<span class="fc" id="L11">    private Fund(Builder builder) {</span>
+<span class="fc" id="L12">        this.name = builder.name;</span>
+<span class="fc" id="L13">        this.stocks = builder.stocks;</span>
+<span class="fc" id="L14">    }</span>
+
+    public String getName() {
+<span class="fc" id="L17">        return name;</span>
+    }
+
+    public Set&lt;String&gt; getStocks() {
+<span class="fc" id="L21">        return stocks;</span>
+    }
+
+    public static class Builder {
+        private String name;
+        private Set&lt;String&gt; stocks;
+
+<span class="fc" id="L28">        public Builder() {</span>
+<span class="fc" id="L29">        }</span>
+
+        public Builder withName(String name) {
+<span class="fc" id="L32">            this.name = name;</span>
+<span class="fc" id="L33">            return this;</span>
+        }
+
+        public Builder withStocks(Set&lt;String&gt; stocks) {
+<span class="fc" id="L37">            this.stocks = stocks;</span>
+<span class="fc" id="L38">            return this;</span>
+        }
+
+        public Fund build() {
+<span class="fc" id="L42">            return new Fund(this);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
