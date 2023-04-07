@@ -21,13 +21,12 @@ public class CurrentPortfolioCommand implements ICommand {
     // Execute the registered Command
     @Override
     public void execute(List<String> tokens) throws CommandNotFoundException, NullPointerException {
-        if(tokens==null) throw new CommandNotFoundException("COMMAND_NOT_FOUND");
-        String commandName=tokens.get(0);
+        if(tokens==null) 
+           throw new CommandNotFoundException("FUND_NOT_FOUND");
+        
        
         try {
-            if (!commandName.equals("CURRENT_PORTFOLIO")) {
-                throw new CommandNotFoundException("COMMAND_NOT_FOUND");
-            }
+          
             String[] temp = new String[tokens.size()];
             tokens.toArray(temp);
             String[] fundList = Arrays.copyOfRange(temp, 1, temp.length);

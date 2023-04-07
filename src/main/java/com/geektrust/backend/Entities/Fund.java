@@ -3,7 +3,7 @@ package com.geektrust.backend.Entities;
 import java.util.Set;
 
 
-public final class Fund {
+public final class Fund implements IFund{
     
     private final String name;
     private final Set<String> stocks;

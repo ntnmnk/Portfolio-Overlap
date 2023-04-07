@@ -25,6 +25,26 @@ public class PortfolioCalculatorTest {
        // Set<String> actualOverlap = overlapCalculator.overlap(Arrays.);
         
        // assertEquals(new HashSet<>(), actualOverlap);
+               // test null input case
+               Set<String> fundList1 = Arrays.asList("NAZARA", "BALAJIAMINES", "ALKYLAMINES").stream().collect(Collectors.toSet());
+               Set<String> fundList2 = Arrays.asList("MAXHEALTH", "BALAJIAMINES", "NAZARA", "TATACOFEE").stream().collect(Collectors.toSet());
+               String overlap = overlapCalculator.overlap(fundList1, fundList2);
+               String overlapPercentage = overlapCalculator.overlap(null, fundList2);
+               assertEquals("Please check the input", overlapPercentage);
+       
+    }
+
+    @Test
+    public void testGetPortfolioOverlap_withEmptyListforfund2() {
+        
+       
+               // test null input case
+               Set<String> fundList1 = Arrays.asList("NAZARA", "BALAJIAMINES", "ALKYLAMINES").stream().collect(Collectors.toSet());
+               Set<String> fundList2 = Arrays.asList("MAXHEALTH", "BALAJIAMINES", "NAZARA", "TATACOFEE").stream().collect(Collectors.toSet());
+              // String overlap = overlapCalculator.overlap(fundList1, fundList2);
+               String overlapPercentage = overlapCalculator.overlap(fundList1, null);
+               assertEquals("Please check the input", overlapPercentage);
+       
     }
 
 }

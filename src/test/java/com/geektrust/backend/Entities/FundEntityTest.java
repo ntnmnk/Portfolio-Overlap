@@ -24,7 +24,7 @@ public class FundEntityTest {
         .build();
 ;
         String testStock = "ACC LIMITED";
-        //System.out.println(fund.getStocks());
+        
         assertTrue(fund.getStocks().contains(testStock));
 
                     

@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.Set;
 import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Exceptions.StockNotFoundException;
-import com.geektrust.backend.Repository.FundsRepository;
 import com.geektrust.backend.Repository.IFundsRepository;
 import com.geektrust.backend.Util.IPortfolioOverlapCalculator;
 import com.geektrust.backend.Util.PortfolioOverlapCalculator;
@@ -19,7 +18,7 @@ public class PortfolioService implements IPortfolioService {
 
     private final IFundsRepository fundsRepository;
 
-    private  IPortfolioOverlapCalculator portfolioOverlapCalculator = new PortfolioOverlapCalculator();
+    private  final IPortfolioOverlapCalculator portfolioOverlapCalculator = new PortfolioOverlapCalculator();
 
 
     public PortfolioService(IFundsRepository fundsRepository ) {
@@ -27,33 +26,28 @@ public class PortfolioService implements IPortfolioService {
        
     }
 
-
     @Override
     public void currentPortfolioStocks(String[] fundList) throws FundNotFoundException {
         // Adding given funds to user's portfolio
-        if (fundList == null||fundList.length==0) {
-           
-            throw new FundNotFoundException("FUND_NOT_FOUND");
-        }
+        Optional.ofNullable(fundList).filter(fl -> fl.length > 0).orElseThrow(() -> new FundNotFoundException("FUND_NOT_FOUND"));
         fundNames = fundList;
+
     }
 
     @Override
     public List<String> calculatePortfolioOverlap(String fundForCalculation) {
         List<String> overlapList = new ArrayList<>();
-        for (String fund : this.fundNames) {
+        Arrays.stream(this.fundNames).forEach(fund -> {
             String overlapPercentage = calculateOverlapPercentage(fund, fundForCalculation);
-            if (Double.parseDouble(overlapPercentage) > 0) {
-                overlapList.add(fundForCalculation + " " + fund + " " + overlapPercentage + "%");
-            }
-        }
-        if (overlapList.isEmpty()) {
-            throw new FundNotFoundException("FUND_NOT_FOUND");
-        }
+            Optional.ofNullable(overlapPercentage).filter(op -> Double.parseDouble(op) > 0)
+                    .ifPresent(op -> overlapList.add(fundForCalculation + " " + fund + " " + op + "%"));
+        });
+        Optional.of(overlapList).filter(ol -> !ol.isEmpty())
+                .orElseThrow(() -> new FundNotFoundException("FUND_NOT_FOUND"));
         return overlapList;
-    
+
         }  
-          
+
         private String calculateOverlapPercentage(String fund1, String fund2) {
             Set<String> fund1Stocks = fundsRepository.getStocksFromFund(fund1);
             Set<String> fund2Stocks = fundsRepository.getStocksFromFund(fund2);
@@ -68,21 +62,21 @@ public class PortfolioService implements IPortfolioService {
             throws FundNotFoundException {
         // Adding the fund name to which the new stock will be added and the name of the new
         // stock.
-        try {
-            fundsRepository.addStocksToFund(fundName, stockName);
-        } 
-        catch (FundNotFoundException e) 
-        {
-            throw new FundNotFoundException("FUND_NOT_FOUND");
-        }
+         Optional.ofNullable(fundName)
+        .orElseThrow(() -> new FundNotFoundException("FUND_NOT_FOUND"));
+
+         Optional.ofNullable(stockName)
+        .orElseThrow(() -> new StockNotFoundException("STOCK_NOT_FOUND"));
+
+         fundsRepository.addStocksToFund(fundName, stockName);
+
     }
 
 
     public String[] getFundNames() {
 
-        for (String string : fundNames) {
-            System.out.println(string);
-        }
+        Arrays.stream(fundNames).forEach(System.out::println);
         return fundNames;
+
     }
 }

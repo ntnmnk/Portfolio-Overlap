@@ -20,14 +20,6 @@ public class AddStockCommand implements ICommand {
     @Override
     public void execute(List<String> tokens) throws CommandNotFoundException,FundNotFoundException,StockNotFoundException {
         
-            if (tokens == null || tokens.isEmpty()) {
-                throw new CommandNotFoundException("COMMAND_NOT_FOUND");
-            }
-            String commandName = tokens.get(0);
-            if (!commandName.equals("ADD_STOCK")) {
-                throw new CommandNotFoundException("COMMAND_NOT_FOUND");
-            }
-    
             try{
                 String fundName = tokens.get(1);
                 

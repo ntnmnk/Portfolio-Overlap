@@ -25,17 +25,17 @@ public class ApplicationConfig {
                         new PortfolioService(fundsRepository);
 
 
-        private AddStockCommand addStockCommand=new AddStockCommand(portfolioService) ;
+        private final AddStockCommand addStockCommand=new AddStockCommand(portfolioService) ;
 
          
-        private CalculateOverlapCommand calculateOverlapCommand =new CalculateOverlapCommand(
+        private final CalculateOverlapCommand calculateOverlapCommand =new CalculateOverlapCommand(
                         portfolioService);
 
                       
-        private CurrentPortfolioCommand currentPortfolioCommand=new CurrentPortfolioCommand(portfolioService) ;
+        private final CurrentPortfolioCommand currentPortfolioCommand=new CurrentPortfolioCommand(portfolioService) ;
 
 
-        public CommandInvoker getCommandInvoker() {
+        public final CommandInvoker getCommandInvoker() {
 
                 commandInvoker.register("CURRENT_PORTFOLIO", currentPortfolioCommand);
                 commandInvoker.register("CALCULATE_OVERLAP", calculateOverlapCommand);

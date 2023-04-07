@@ -64,16 +64,6 @@ public class AddStockToFundCommandTest {
    
 
    
-
-    
-    @Test
-    public void testExecute_withNullParameter() throws CommandNotFoundException {
-        List<String> tokens = null;
-        assertThrows(CommandNotFoundException.class, () -> addStockCommand.execute(tokens));
-        verify(portfolioServiceMock, never()).addStocksToFund(anyString(), anyString());
-    }
-    
-   
 @Test
 @DisplayName("execute should call addStocksToFund method of portfolioService with valid input")
 void testExecuteWithValidInput() throws Exception {
@@ -82,12 +72,6 @@ void testExecuteWithValidInput() throws Exception {
     verify(portfolioServiceMock).addStocksToFund("fund", "stock");
 }
 
-@Test
-@DisplayName("execute should throw CommandNotFoundException when commandName is not ADD_STOCK")
-void testExecuteWithInvalidCommandName() {
-    List<String> tokens = new ArrayList<>(Arrays.asList("INVALID_COMMAND", "fund", "stock"));
-    assertThrows(CommandNotFoundException.class, () -> addStockCommand.execute(tokens));
-}
 @Test
 void execute_validInput_callsAddStocksToFund() throws Exception {
     List<String> tokens = Arrays.asList("ADD_STOCK", "FUND_NAME", "STOCK_NAME");

@@ -6,11 +6,10 @@ import com.geektrust.backend.Exceptions.CommandNotFoundException;
 import com.geektrust.backend.Exceptions.FundNotFoundException;
 import com.geektrust.backend.Services.IPortfolioService;
 
-public class CalculateOverlapCommand implements ICommand {
-
-    
-        
-    private  IPortfolioService portfolioService;
+public class CalculateOverlapCommand implements ICommand 
+{
+   
+    private final IPortfolioService portfolioService;
     
     
     public CalculateOverlapCommand(IPortfolioService portfolioService) {

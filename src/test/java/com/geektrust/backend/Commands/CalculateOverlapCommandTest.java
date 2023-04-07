@@ -24,12 +24,10 @@ import com.geektrust.backend.Repository.IFundsRepository;
 import com.geektrust.backend.Services.PortfolioService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -49,15 +47,17 @@ public class CalculateOverlapCommandTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-       // calculateOverlapCommand = new CalculateOverlapCommand(portOverlapServiceMock);
-       portOverlapServiceMock = mock(PortfolioService.class);
+      
+        portOverlapServiceMock = mock(PortfolioService.class);
         calculateOverlapCommand = new CalculateOverlapCommand(portOverlapServiceMock);
         System.setOut(new PrintStream(outputStreamCaptor));
 
         
     }   
+    
+
     @Test
-    @DisplayName("addStockCommand execute methodshould return (Catching Null Pointer Exception) There is no Command if there is no command found")
+
     public void execute_shouldPrintCommandNotFoundMessage_whenCommandNotFoundExceptionIsThrown() throws CommandNotFoundException {
         // Arrange
         String fundName = "MIRAE_ASSET_EMERGING_BLUECHIP";
@@ -117,8 +117,7 @@ public class CalculateOverlapCommandTest {
 
     }
     @Test
-    @DisplayName("execute method should catch NullPointerException and print \"COMMAND_NOT_FOUND\" to console")
-    public void execute_shouldCatchNullPointerExceptionAndPrintCommandNotFoundMessage() throws CommandNotFoundException {
+    public void test_shouldCatchNullPointerExceptionAndPrintCommandNotFoundMessage() throws CommandNotFoundException {
         // Arrange
         List<String> tokens = null;
 
