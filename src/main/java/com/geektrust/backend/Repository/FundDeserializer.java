@@ -28,7 +28,11 @@ public class FundDeserializer extends JsonDeserializer<Fund> {
             }
         }
 
-        return new Fund(name, stocks);
+        return new Fund.Builder()
+        .withName(name)
+        .withStocks(stocks)
+        .build();
+
     }
 
 }

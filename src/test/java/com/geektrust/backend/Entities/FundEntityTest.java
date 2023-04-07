@@ -18,7 +18,11 @@ public class FundEntityTest {
         stocks.add("GAIL (INDIA) LIMITED");
         stocks.add("INFO EDGE (INDIA) LIMITED");
 
-        Fund fund = new Fund(name , stocks);
+        Fund fund =  new Fund.Builder()
+        .withName(name)
+        .withStocks(stocks)
+        .build();
+;
         String testStock = "ACC LIMITED";
         //System.out.println(fund.getStocks());
         assertTrue(fund.getStocks().contains(testStock));
