@@ -10,7 +10,6 @@ import com.geektrust.backend.Services.IPortfolioService;
 
 public class AddStockCommand implements ICommand {
     
-    
     private final IPortfolioService portfolioService;
 
     public AddStockCommand(IPortfolioService portfolioService) {
