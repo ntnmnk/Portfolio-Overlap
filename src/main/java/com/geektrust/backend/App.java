@@ -14,7 +14,7 @@ import com.geektrust.backend.Exceptions.CommandNotFoundException;
 public class App {
     // To run the application ./gradlew run --args="input.txt"
    
-     
+    
     static ApplicationConfig applicationConfig=new ApplicationConfig();
 
 

@@ -12,6 +12,8 @@ public class FundsResponse{
      public List<Fund> getFunds() {
           return funds;
       }
+
+      
   
       public void setFunds(List<Fund> funds) {
           this.funds = funds;
