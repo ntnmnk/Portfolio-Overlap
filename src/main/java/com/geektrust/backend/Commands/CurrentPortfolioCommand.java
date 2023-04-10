@@ -13,6 +13,7 @@ public class CurrentPortfolioCommand implements ICommand {
     private final IPortfolioService portfolioOverlapService;
 
     
+    
     public CurrentPortfolioCommand(IPortfolioService portfolioService) {
         this.portfolioOverlapService = portfolioService;
     }
